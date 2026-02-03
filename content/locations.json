@@ -84,6 +84,12 @@
     "visited": false
   },
   {
+    "name": "Villa La Roche",
+    "address": "10 Square du Docteur Blanche, 75016 Paris, France",
+    "coordinates": [48.8530, 2.2640],
+    "visited": true
+  },
+  {
     "name": "Palais de Tokyo",
     "address": "13 Avenue du Président Wilson, 75116 Paris, France",
     "coordinates": [48.8641, 2.2966],
