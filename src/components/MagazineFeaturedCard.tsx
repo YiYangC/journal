@@ -18,7 +18,7 @@ export default function MagazineFeaturedCard({
   const items = articles.length > 0 ? articles : [];
 
   return (
-    <div className="h-full bg-black text-white overflow-y-auto">
+    <div className="h-full bg-[var(--color-surface)] text-[var(--color-text)] overflow-y-auto">
       {items.map((article) => {
         const isExpanded = expandedSlug === article.slug;
         const formattedDate = new Date(article.date).toLocaleDateString(
@@ -29,18 +29,18 @@ export default function MagazineFeaturedCard({
         return (
           <div
             key={article.slug}
-            className="border-b border-[#222]"
+            className="border-b border-[var(--color-border)]"
           >
             <button
               onClick={() =>
                 setExpandedSlug(isExpanded ? null : article.slug)
               }
-              className="w-full text-left px-5 py-4 md:px-6 md:py-5 flex items-baseline justify-between gap-4 hover:bg-[#111] transition-colors cursor-pointer"
+              className="w-full text-left px-5 py-4 md:px-6 md:py-5 flex items-baseline justify-between gap-4 hover:bg-[var(--color-bg)] transition-colors cursor-pointer"
             >
               <span className="text-xs md:text-sm font-bold uppercase tracking-[0.02em] leading-tight">
                 {article.title}
               </span>
-              <span className="text-[10px] uppercase tracking-[0.15em] text-[#666] shrink-0">
+              <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] shrink-0">
                 {formattedDate}
               </span>
             </button>
@@ -58,14 +58,14 @@ export default function MagazineFeaturedCard({
                       sizes="(min-width: 1024px) 49vw, 100vw"
                     />
                   </div>
-                  <p className="mt-3 text-sm text-[#999] font-serif italic leading-relaxed">
+                  <p className="mt-3 text-sm text-[var(--color-alt)] font-serif italic leading-relaxed">
                     {article.excerpt}
                   </p>
-                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#222]">
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-[#666]">
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-[var(--color-border)]">
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)]">
                       {article.category} / {article.location}
                     </span>
-                    <span className="text-[10px] uppercase tracking-[0.15em] text-[#666] group-hover:text-white transition-colors">
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] group-hover:text-[var(--color-text)] transition-colors">
                       Read &rarr;
                     </span>
                   </div>
