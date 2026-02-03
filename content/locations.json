@@ -81,7 +81,7 @@
     "name": "Villa Savoye",
     "address": "82 Rue de Villiers, 78300 Poissy, France",
     "coordinates": [48.9345, 2.0460],
-    "visited": false
+    "visited": true
   },
   {
     "name": "Villa La Roche",
@@ -245,7 +245,7 @@
     "name": "Fondazione Querini Stampalia",
     "address": "Campo Santa Maria Formosa 5252, 30122 Venezia, Italy",
     "coordinates": [45.4360, 12.3378],
-    "visited": false
+    "visited": true
   },
   {
     "name": "Olivetti Showroom (Negozio Olivetti)",

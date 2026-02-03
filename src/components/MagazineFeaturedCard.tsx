@@ -1,51 +1,80 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Article } from "@/lib/types";
 
 interface MagazineFeaturedCardProps {
   article: Article;
+  articles?: Article[];
 }
 
 export default function MagazineFeaturedCard({
-  article,
+  articles = [],
 }: MagazineFeaturedCardProps) {
-  const formattedDate = new Date(article.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-  });
+  const [expandedSlug, setExpandedSlug] = useState<string | null>(null);
+
+  const items = articles.length > 0 ? articles : [];
 
   return (
-    <Link
-      href={`/articles/${article.slug}`}
-      className="group flex flex-col h-full"
-    >
-      <div className="p-5 md:p-6 lg:p-8">
-        <h2 className="magazine-card__title text-xl md:text-2xl lg:text-3xl">
-          {article.title}
-        </h2>
-        <p className="magazine-card__description text-sm md:text-base mt-3 text-[var(--color-alt)]">
-          {article.excerpt}
-        </p>
-        <div className="flex items-center justify-between mt-4 pt-4 border-t border-[var(--color-border)]">
-          <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)]">
-            {article.category} / {article.location}
-          </span>
-          <time className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)]">
-            {formattedDate}
-          </time>
-        </div>
-      </div>
-      <div className="flex-1 overflow-hidden min-h-[300px]">
-        <Image
-          src={article.coverImage}
-          alt={article.title}
-          width={1200}
-          height={800}
-          className="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.7,1)] group-hover:scale-[1.03]"
-          sizes="(min-width: 1024px) 49vw, 100vw"
-          priority
-        />
-      </div>
-    </Link>
+    <div className="h-full bg-black text-white overflow-y-auto">
+      {items.map((article) => {
+        const isExpanded = expandedSlug === article.slug;
+        const formattedDate = new Date(article.date).toLocaleDateString(
+          "en-US",
+          { year: "numeric", month: "short" }
+        );
+
+        return (
+          <div
+            key={article.slug}
+            className="border-b border-[#222]"
+          >
+            <button
+              onClick={() =>
+                setExpandedSlug(isExpanded ? null : article.slug)
+              }
+              className="w-full text-left px-5 py-4 md:px-6 md:py-5 flex items-baseline justify-between gap-4 hover:bg-[#111] transition-colors cursor-pointer"
+            >
+              <span className="text-xs md:text-sm font-bold uppercase tracking-[0.02em] leading-tight">
+                {article.title}
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.15em] text-[#666] shrink-0">
+                {formattedDate}
+              </span>
+            </button>
+
+            {isExpanded && (
+              <div className="px-5 pb-5 md:px-6 md:pb-6">
+                <Link href={`/articles/${article.slug}`} className="block group">
+                  <div className="overflow-hidden">
+                    <Image
+                      src={article.coverImage}
+                      alt={article.title}
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto object-cover transition-transform duration-700 ease-[cubic-bezier(0.2,1,0.7,1)] group-hover:scale-[1.03]"
+                      sizes="(min-width: 1024px) 49vw, 100vw"
+                    />
+                  </div>
+                  <p className="mt-3 text-sm text-[#999] font-serif italic leading-relaxed">
+                    {article.excerpt}
+                  </p>
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-[#222]">
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-[#666]">
+                      {article.category} / {article.location}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.15em] text-[#666] group-hover:text-white transition-colors">
+                      Read &rarr;
+                    </span>
+                  </div>
+                </Link>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 }

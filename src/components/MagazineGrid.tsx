@@ -7,20 +7,15 @@ interface MagazineGridProps {
 }
 
 export default function MagazineGrid({ articles }: MagazineGridProps) {
-  // Sort: featured first, then by date descending
-  const sorted = [...articles].sort((a, b) => {
-    if (a.featured && !b.featured) return -1;
-    if (!a.featured && b.featured) return 1;
-    return new Date(b.date).getTime() - new Date(a.date).getTime();
-  });
+  // Sort by date descending
+  const sorted = [...articles].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
-  const featured = sorted[0];
-  const remaining = sorted.slice(1);
-
-  // Distribute remaining articles between left and middle columns
+  // Distribute articles between left and middle columns
   const leftColumn: Article[] = [];
   const middleColumn: Article[] = [];
-  remaining.forEach((article, i) => {
+  sorted.forEach((article, i) => {
     if (i % 2 === 0) {
       leftColumn.push(article);
     } else {
@@ -44,9 +39,9 @@ export default function MagazineGrid({ articles }: MagazineGridProps) {
         ))}
       </div>
 
-      {/* Right column — featured */}
+      {/* Right column — black panel with expandable list */}
       <div className="magazine-col--featured flex flex-col">
-        {featured && <MagazineFeaturedCard article={featured} />}
+        <MagazineFeaturedCard article={sorted[0]} articles={sorted} />
       </div>
     </div>
   );
