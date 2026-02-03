@@ -1,26 +1,170 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: "neuzeit-grotesk", sans-serif;
+  --font-serif: "span", serif;
+
+  --color-bg: var(--color-bg-val);
+  --color-text: var(--color-text-val);
+  --color-link: var(--color-link-val);
+  --color-link-hover: var(--color-link-hover-val);
+  --color-alt: var(--color-alt-val);
+  --color-surface: var(--color-surface-val);
+  --color-border: var(--color-border-val);
+  --color-card-bg: var(--color-card-bg-val);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---- Light mode (default) ---- */
+:root {
+  --color-bg-val: #fafafa;
+  --color-text-val: #111;
+  --color-link-val: rgb(90, 90, 90);
+  --color-link-hover-val: #000;
+  --color-alt-val: #6d6d6d;
+  --color-surface-val: #ffffff;
+  --color-border-val: #e5e5e5;
+  --color-card-bg-val: #ffffff;
+}
+
+/* ---- Dark mode (portfolio palette) ---- */
+.dark {
+  --color-bg-val: #000000;
+  --color-text-val: #fff;
+  --color-link-val: rgb(165, 164, 164);
+  --color-link-hover-val: #fff;
+  --color-alt-val: #6d6d6d;
+  --color-surface-val: #111;
+  --color-border-val: #222;
+  --color-card-bg-val: #111;
+}
+
+/* ---- Base styles ---- */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-sans);
+  counter-reset: contentSection;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+}
+
+/* ---- Portfolio numbered section pattern ---- */
+.section--numbered {
+  position: relative;
+  counter-increment: contentSection;
+}
+
+.section--numbered::after {
+  content: counter(contentSection, decimal-leading-zero);
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  border: 1px solid var(--color-alt);
+  color: var(--color-alt);
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.875rem;
+}
+
+/* ---- Article card image hover ---- */
+.article-card__image {
+  transition: transform 0.6s cubic-bezier(0.2, 1, 0.7, 1);
+}
+
+.article-card:hover .article-card__image {
+  transform: scale(1.03);
+}
+
+/* ---- Prose overrides for dark mode ---- */
+/* ---- Magazine grid layout ---- */
+.magazine-grid {
+  display: grid;
+  grid-template-columns: 30fr 21fr 49fr;
+  min-height: calc(100vh - 52px);
+}
+
+.magazine-grid > *:not(:last-child) {
+  border-right: 1px solid var(--color-border);
+}
+
+@media (max-width: 1024px) {
+  .magazine-grid {
+    grid-template-columns: 1fr 1fr;
+    min-height: auto;
+  }
+  .magazine-grid > .magazine-col--featured {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+  .magazine-grid > *:not(:last-child) {
+    border-right: none;
+  }
+  .magazine-grid > *:first-child {
+    border-right: 1px solid var(--color-border);
+  }
+}
+
+@media (max-width: 640px) {
+  .magazine-grid {
+    grid-template-columns: 1fr;
+  }
+  .magazine-grid > *:not(:last-child),
+  .magazine-grid > *:first-child {
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+}
+
+/* Magazine card typography */
+.magazine-card__title {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+.magazine-card__description {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+/* ---- Prose overrides for dark mode ---- */
+.prose {
+  --tw-prose-body: var(--color-text);
+  --tw-prose-headings: var(--color-text);
+  --tw-prose-links: var(--color-link);
+  --tw-prose-bold: var(--color-text);
+  --tw-prose-quotes: var(--color-alt);
+  --tw-prose-quote-borders: var(--color-alt);
+  --tw-prose-counters: var(--color-alt);
+  --tw-prose-bullets: var(--color-alt);
+  --tw-prose-hr: var(--color-border);
+  --tw-prose-code: var(--color-text);
+  --tw-prose-pre-bg: var(--color-surface);
 }

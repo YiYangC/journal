@@ -1,0 +1,558 @@
+[
+  {
+    "name": "TOTO GALLERY・MA",
+    "address": "Minato City, Minamiaoyama, Tokyo, Japan",
+    "coordinates": [35.6666, 139.7187],
+    "visited": true
+  },
+  {
+    "name": "Chapelle Le Corbusier",
+    "address": "Ronchamp, France",
+    "coordinates": [47.7059, 6.6310],
+    "visited": true
+  },
+  {
+    "name": "Fondation Beyeler",
+    "address": "Riehen, Basel, Switzerland",
+    "coordinates": [47.5886, 7.6460],
+    "visited": true
+  },
+  {
+    "name": "Staatsgalerie Stuttgart",
+    "address": "Stuttgart, Germany",
+    "coordinates": [48.7810, 9.1920],
+    "visited": true
+  },
+  {
+    "name": "Art Museum Stuttgart",
+    "address": "Stuttgart, Germany",
+    "coordinates": [48.7786, 9.1798],
+    "visited": true
+  },
+  {
+    "name": "City Library at the Mailänder Platz",
+    "address": "Mailänder Platz 1, 70173 Stuttgart, Germany",
+    "coordinates": [48.7892, 9.1829],
+    "visited": true
+  },
+  {
+    "name": "Weissenhof Estate",
+    "address": "Rathenaustraße 1-3, 70191 Stuttgart, Germany",
+    "coordinates": [48.8011, 9.1727],
+    "visited": true
+  },
+  {
+    "name": "Pulitzer Arts Foundation",
+    "address": "3716 Washington Blvd, St. Louis, MO 63108, USA",
+    "coordinates": [38.6402, -90.2331],
+    "visited": true
+  },
+  {
+    "name": "George Nakashima House",
+    "address": "1847 Aquetong Rd, New Hope, PA 18938, USA",
+    "coordinates": [40.3606, -74.9516],
+    "visited": true
+  },
+  {
+    "name": "James Rose Center",
+    "address": "506 Navesink River Rd, Red Bank, NJ 07701, USA",
+    "coordinates": [40.3396, -74.0917],
+    "visited": true
+  },
+  {
+    "name": "Transamerica Pyramid",
+    "address": "600 Montgomery St, San Francisco, CA 94111, USA",
+    "coordinates": [37.7952, -122.4028],
+    "visited": true
+  },
+  {
+    "name": "Glass House (Philip Johnson)",
+    "address": "199 Elm St, New Canaan, CT 06840, USA",
+    "coordinates": [41.2372, -73.4956],
+    "visited": true
+  },
+  {
+    "name": "Grace Farms",
+    "address": "365 Lukes Wood Rd, New Canaan, CT 06840, USA",
+    "coordinates": [41.1877, -73.5046],
+    "visited": true
+  },
+  {
+    "name": "Villa Savoye",
+    "address": "82 Rue de Villiers, 78300 Poissy, France",
+    "coordinates": [48.9345, 2.0460],
+    "visited": true
+  },
+  {
+    "name": "Palais de Tokyo",
+    "address": "13 Avenue du Président Wilson, 75116 Paris, France",
+    "coordinates": [48.8641, 2.2966],
+    "visited": true,
+    "visitDate": "2024-08-24"
+  },
+  {
+    "name": "Katsura Imperial Villa",
+    "address": "Nishikyo Ward, Kyoto, Japan",
+    "coordinates": [34.9881, 135.6809],
+    "visited": true
+  },
+  {
+    "name": "Tomba Brion",
+    "address": "Via Brion, 31030 San Vito d'Altivole, Italy",
+    "coordinates": [45.7584, 11.9636],
+    "visited": true
+  },
+  {
+    "name": "Castelvecchio Museum",
+    "address": "Corso Castelvecchio 2, 37121 Verona, Italy",
+    "coordinates": [45.4383, 10.9877],
+    "visited": true
+  },
+  {
+    "name": "Arcosanti",
+    "address": "13555 S Cross L Rd, Mayer, AZ 86333, USA",
+    "coordinates": [34.3174, -112.0720],
+    "visited": true
+  },
+  {
+    "name": "The National Art Center, Tokyo",
+    "address": "7 Chome-22-2 Roppongi, Minato City, Tokyo, Japan",
+    "coordinates": [35.6655, 139.7294],
+    "visited": true
+  },
+  {
+    "name": "Heisei Chishinkan Wing, Kyoto National Museum",
+    "address": "527 Chaya-cho, Higashiyama Ward, Kyoto, Japan",
+    "coordinates": [34.9876, 135.7710],
+    "visited": true
+  },
+  {
+    "name": "Ryōan-ji",
+    "address": "13 Ryoanji Goryonoshitacho, Ukyo Ward, Kyoto, Japan",
+    "coordinates": [35.0345, 135.7186],
+    "visited": true
+  },
+  {
+    "name": "The Shinmonzen",
+    "address": "235 Shinmonzendori Nakamachi, Higashiyama Ward, Kyoto, Japan",
+    "coordinates": [35.0043, 135.7750],
+    "visited": true
+  },
+  {
+    "name": "Kahitsukan – Kyoto Museum of Contemporary Art",
+    "address": "271-1 Shinpukujicho, Nakagyo Ward, Kyoto, Japan",
+    "coordinates": [35.0091, 135.7670],
+    "visited": true
+  },
+  {
+    "name": "Nakanoshima Children's Book Forest",
+    "address": "1-1 Nakanoshima, Kita Ward, Osaka, Japan",
+    "coordinates": [34.6915, 135.5079],
+    "visited": true
+  },
+  {
+    "name": "Vitra Campus",
+    "address": "Charles-Eames-Straße 2, 79576 Weil am Rhein, Germany",
+    "coordinates": [47.6042, 7.6228],
+    "visited": true
+  },
+  {
+    "name": "Seattle Central Library",
+    "address": "1000 4th Ave, Seattle, WA 98104, USA",
+    "coordinates": [47.6067, -122.3325],
+    "visited": true,
+    "visitDate": "2024-04-06"
+  },
+  {
+    "name": "Museum of Pop Culture (MoPOP)",
+    "address": "325 5th Ave N, Seattle, WA 98109, USA",
+    "coordinates": [47.6215, -122.3481],
+    "visited": true
+  },
+  {
+    "name": "Seattle Art Museum (SAM)",
+    "address": "1300 1st Ave, Seattle, WA 98101, USA",
+    "coordinates": [47.6073, -122.3381],
+    "visited": true
+  },
+  {
+    "name": "Fundació Joan Miró",
+    "address": "Parc de Montjuïc s/n, 08038 Barcelona, Spain",
+    "coordinates": [41.3690, 2.1580],
+    "visited": true
+  },
+  {
+    "name": "De Young Museum",
+    "address": "50 Hagiwara Tea Garden Dr, San Francisco, CA 94118, USA",
+    "coordinates": [37.7715, -122.4687],
+    "visited": true
+  },
+  {
+    "name": "San Francisco Museum of Modern Art (SFMoMA)",
+    "address": "151 3rd St, San Francisco, CA 94103, USA",
+    "coordinates": [37.7857, -122.4011],
+    "visited": true
+  },
+  {
+    "name": "Eero Saarinen JFK Terminal (TWA Flight Center)",
+    "address": "JFK Airport, Queens, NY 11430, USA",
+    "coordinates": [40.6458, -73.7775],
+    "visited": true
+  },
+  {
+    "name": "MIT Stata Center",
+    "address": "32 Vassar St, Cambridge, MA 02139, USA",
+    "coordinates": [42.3616, -71.0906],
+    "visited": true
+  },
+  {
+    "name": "MIT Simmons Residence",
+    "address": "229 Vassar St, Cambridge, MA 02139, USA",
+    "coordinates": [42.3577, -71.0946],
+    "visited": true
+  },
+  {
+    "name": "MIT Media Lab Old Building",
+    "address": "20 Ames St, Cambridge, MA 02142, USA",
+    "coordinates": [42.3600, -71.0874],
+    "visited": true
+  },
+  {
+    "name": "MIT Media Lab New Building",
+    "address": "75 Amherst St, Cambridge, MA 02139, USA",
+    "coordinates": [42.3603, -71.0879],
+    "visited": true
+  },
+  {
+    "name": "Harvard GSD Gund Hall",
+    "address": "48 Quincy St, Cambridge, MA 02138, USA",
+    "coordinates": [42.3745, -71.1147],
+    "visited": true
+  },
+  {
+    "name": "Yale British Art Museum",
+    "address": "1080 Chapel St, New Haven, CT 06510, USA",
+    "coordinates": [41.3083, -72.9306],
+    "visited": true
+  },
+  {
+    "name": "Fondazione Querini Stampalia",
+    "address": "Campo Santa Maria Formosa 5252, 30122 Venezia, Italy",
+    "coordinates": [45.4360, 12.3378],
+    "visited": true
+  },
+  {
+    "name": "Olivetti Showroom (Negozio Olivetti)",
+    "address": "Piazza San Marco 101, 30124 Venezia, Italy",
+    "coordinates": [45.4343, 12.3388],
+    "visited": true
+  },
+  {
+    "name": "Giardini della Biennale (Scarpa elements)",
+    "address": "Giardini, Castello, 30122 Venice, Italy",
+    "coordinates": [45.4328, 12.3580],
+    "visited": true
+  },
+  {
+    "name": "Museo Correr (Scarpa displays)",
+    "address": "Piazza San Marco 52, 30124 Venezia, Italy",
+    "coordinates": [45.4342, 12.3375],
+    "visited": true
+  },
+  {
+    "name": "Accademia Galleries (Scarpa interventions)",
+    "address": "Dorsoduro 1050, 30123 Venezia, Italy",
+    "coordinates": [45.4318, 12.3301],
+    "visited": true
+  },
+  {
+    "name": "West Village (Basis Yard) / Liu Jiakun",
+    "address": "1 Beisen North Rd, Qingyang District, Chengdu, Sichuan, China",
+    "coordinates": [30.6651, 104.0633],
+    "visited": true
+  },
+  {
+    "name": "Museum of Contemporary Art Chengdu (MOCA Chengdu) (Liu Jiakun)",
+    "address": "Tianfu Software Park, Chengdu, Sichuan, China",
+    "coordinates": [30.6370, 104.0616],
+    "visited": true
+  },
+  {
+    "name": "Luyeyuan Stone Sculpture Art Museum (Liu Jiakun)",
+    "address": "Outskirts of Chengdu, Sichuan, China",
+    "coordinates": [30.7510, 104.0260],
+    "visited": true
+  },
+  {
+    "name": "Shuijingfang Museum (Liu Jiakun)",
+    "address": "Shuijingfang, Chengdu, Sichuan, China",
+    "coordinates": [30.6500, 104.0160],
+    "visited": true
+  },
+  {
+    "name": "Hu Huishan Memorial (Liu Jiakun)",
+    "address": "Near Chengdu, Sichuan, China",
+    "coordinates": [30.6550, 104.0750],
+    "visited": true
+  },
+  {
+    "name": "Sichuan Fine Arts Institute – Sculpture Dept (Liu Jiakun)",
+    "address": "Fule Rd, Shawan District, Chongqing, China",
+    "coordinates": [29.5638, 106.5497],
+    "visited": true
+  },
+  {
+    "name": "Neues Museum",
+    "address": "Bodestraße 1-3, 10178 Berlin, Germany",
+    "coordinates": [52.5206, 13.3969],
+    "visited": true
+  },
+  {
+    "name": "James-Simon-Galerie",
+    "address": "Bodestraße 1-3, 10178 Berlin, Germany",
+    "coordinates": [52.5211, 13.3974],
+    "visited": false
+  },
+  {
+    "name": "Campus Joachimstraße (Chipperfield Office Expansion)",
+    "address": "Joachimstraße 11, 10119 Berlin, Germany",
+    "coordinates": [52.5187, 13.3984],
+    "visited": false
+  },
+  {
+    "name": "Haus Bastian (Am Kupfergraben 10)",
+    "address": "Am Kupfergraben 10, 10117 Berlin, Germany",
+    "coordinates": [52.5217, 13.3960],
+    "visited": false
+  },
+  {
+    "name": "三星蔥蒜棚 (Sanxing Greenhouse Structure)",
+    "address": "No. 305, Sec. 7, Sanxing Rd, Sanxing Township, Yilan County, Taiwan",
+    "coordinates": [24.6617, 121.6216],
+    "visited": false
+  },
+  {
+    "name": "丟丟噹森林 (Diudiudang Forest)",
+    "address": "No. 236, Sec. 1, Yixing Rd, Yilan City, Taiwan",
+    "coordinates": [24.7546, 121.7580],
+    "visited": false
+  },
+  {
+    "name": "樟仔園歷史故事公園 (Zhang-Zai-Yuan Historical Park)",
+    "address": "Yilan City, Yilan County, Taiwan",
+    "coordinates": [24.7579, 121.7555],
+    "visited": false
+  },
+  {
+    "name": "羅東文化工場 (Luodong Cultural Working House)",
+    "address": "No. 96, Sec. 1, Chunjing Rd, Luodong Township, Yilan County, Taiwan",
+    "coordinates": [24.6719, 121.7646],
+    "visited": true,
+    "visitDate": "2024-02-28"
+  },
+  {
+    "name": "宜蘭縣社會福利館 (Yilan Social Welfare Center)",
+    "address": "No. 95, Tongqing St, Yilan City, Taiwan",
+    "coordinates": [24.7617, 121.7507],
+    "visited": false
+  },
+  {
+    "name": "楊士芳紀念林園 (Yang Shih-Fang Memorial Grove)",
+    "address": "No. 66, Jiucheng West Rd, Yilan City, Taiwan",
+    "coordinates": [24.7599, 121.7508],
+    "visited": false
+  },
+  {
+    "name": "津梅棧道 (Jin-Mei Forest Walkway)",
+    "address": "Qinghe Bridge, Yilan City, Taiwan",
+    "coordinates": [24.7627, 121.7488],
+    "visited": true
+  },
+  {
+    "name": "宜蘭縣忠烈祠 (Yilan Martyrs Shrine)",
+    "address": "Fuxing Rd, Yuanshan Township, Yilan County, Taiwan",
+    "coordinates": [24.7453, 121.7222],
+    "visited": false
+  },
+  {
+    "name": "員山機堡戰爭地景博物館 (Yuan-Shan Machine Fort War Landscape Museum)",
+    "address": "No. 398, Jinshan East Rd, Yuanshan Township, Yilan County, Taiwan",
+    "coordinates": [24.7529, 121.7328],
+    "visited": false
+  },
+  {
+    "name": "礁溪生活學習館 (Jiaoxi Life Learning Center)",
+    "address": "Zhongshan Rd Sec. 2, Jiaoxi Township, Yilan County, Taiwan",
+    "coordinates": [24.8268, 121.7667],
+    "visited": false
+  },
+  {
+    "name": "三星張宅 (Sanxing Zhang Residence)",
+    "address": "Sanxing Township, Yilan County, Taiwan",
+    "coordinates": [24.6739, 121.6631],
+    "visited": false
+  },
+  {
+    "name": "壯圍張宅 (Zhuang-Wei Zhang Residence)",
+    "address": "Zhuangwei Township, Yilan County, Taiwan",
+    "coordinates": [24.7468, 121.7860],
+    "visited": false
+  },
+  {
+    "name": "櫻花陵園入口橋與服務中心 (Cherry Blossom Cemetery Entrance Bridge)",
+    "address": "No. 1, Xuegu Blvd, Jiaoxi Township, Yilan County, Taiwan",
+    "coordinates": [24.8233, 121.7026],
+    "visited": false
+  },
+  {
+    "name": "櫻花陵園納骨廊 (Cherry Orchard Cemetery Ossuary Corridor)",
+    "address": "No. 1, Xuegu Blvd, Jiaoxi Township, Yilan County, Taiwan",
+    "coordinates": [24.8233, 121.7026],
+    "visited": false
+  },
+  {
+    "name": "渭水之丘 (Wei-Shui Hill)",
+    "address": "Cherry Blossom Cemetery, Jiaoxi Township, Yilan County, Taiwan",
+    "coordinates": [24.8240, 121.7030],
+    "visited": false
+  },
+  {
+    "name": "龍山國小群英樓 (Longshan Elementary School Qunying Building)",
+    "address": "No. 235, Sec. 3, Heping West Rd, Wanhua District, Taipei, Taiwan",
+    "coordinates": [25.0361, 121.4958],
+    "visited": false
+  },
+  {
+    "name": "台北植物園溫室 (Taipei Botanical Garden Greenhouse)",
+    "address": "No. 53, Nanhai Rd, Zhongzheng District, Taipei, Taiwan",
+    "coordinates": [25.0321, 121.5095],
+    "visited": false
+  },
+  {
+    "name": "關埔國小 (Guanpu Elementary School)",
+    "address": "No. 2, Ciji Rd, East District, Hsinchu City, Taiwan",
+    "coordinates": [24.8279, 121.0197],
+    "visited": false
+  },
+  {
+    "name": "礁溪國小運動場 (Jiaoxi Primary School Elevated Sports Field)",
+    "address": "No. 135, Sec. 4, Jiaoxi Rd, Jiaoxi Township, Yilan County, Taiwan",
+    "coordinates": [24.8214, 121.7696],
+    "visited": false
+  },
+  {
+    "name": "清華大學城市綠門戶 (Urban Green Gateway of NTHU)",
+    "address": "Guangfu Rd Sec. 2, Hsinchu City, Taiwan",
+    "coordinates": [24.7955, 120.9965],
+    "visited": false
+  },
+  {
+    "name": "Hyatt Regency San Francisco",
+    "address": "5 Embarcadero Center, San Francisco, CA 94111, USA",
+    "coordinates": [37.7940, -122.3989],
+    "visited": true,
+    "visitDate": "2024-05-10"
+  },
+  {
+    "name": "Walt Disney Concert Hall",
+    "address": "111 S Grand Ave, Los Angeles, CA 90012, USA",
+    "coordinates": [34.0553, -118.2498],
+    "visited": true
+  },
+  {
+    "name": "The Broad",
+    "address": "221 S Grand Ave, Los Angeles, CA 90012, USA",
+    "coordinates": [34.0544, -118.2506],
+    "visited": true
+  },
+  {
+    "name": "MOCA Grand Avenue",
+    "address": "250 S Grand Ave, Los Angeles, CA 90012, USA",
+    "coordinates": [34.0537, -118.2502],
+    "visited": true
+  },
+  {
+    "name": "LACMA",
+    "address": "5905 Wilshire Blvd, Los Angeles, CA 90036, USA",
+    "coordinates": [34.0638, -118.3589],
+    "visited": true
+  },
+  {
+    "name": "Getty Center",
+    "address": "1200 Getty Center Dr, Los Angeles, CA 90049, USA",
+    "coordinates": [34.0780, -118.4741],
+    "visited": true
+  },
+  {
+    "name": "Getty Villa",
+    "address": "17985 Pacific Coast Hwy, Pacific Palisades, CA 90272, USA",
+    "coordinates": [34.0456, -118.5658],
+    "visited": true
+  },
+  {
+    "name": "Case Study House #8 (Eames House)",
+    "address": "203 N Chautauqua Blvd, Pacific Palisades, CA 90272, USA",
+    "coordinates": [34.0319, -118.5266],
+    "visited": true
+  },
+  {
+    "name": "Case Study House #22 (Stahl House)",
+    "address": "1635 Woods Dr, Los Angeles, CA 90069, USA",
+    "coordinates": [34.1055, -118.3627],
+    "visited": true
+  },
+  {
+    "name": "The Hollyhock House",
+    "address": "4800 Hollywood Blvd, Los Angeles, CA 90027, USA",
+    "coordinates": [34.1257, -118.2942],
+    "visited": true
+  },
+  {
+    "name": "Ennis House",
+    "address": "2655 Glendower Ave, Los Angeles, CA 90027, USA",
+    "coordinates": [34.1180, -118.2870],
+    "visited": true
+  },
+  {
+    "name": "Schindler House (MAK Center)",
+    "address": "835 N Kings Rd, West Hollywood, CA 90069, USA",
+    "coordinates": [34.0906, -118.3740],
+    "visited": true
+  },
+  {
+    "name": "Lovell Health House",
+    "address": "243 N Lovell Ave, Los Angeles, CA 90048, USA",
+    "coordinates": [34.0776, -118.3726],
+    "visited": true
+  },
+  {
+    "name": "Sheats\u2013Goldstein Residence",
+    "address": "10104 Angelo View Dr, Los Angeles, CA 90077, USA",
+    "coordinates": [34.0922, -118.4113],
+    "visited": true
+  },
+  {
+    "name": "Chemosphere House",
+    "address": "7776 Torreyson Dr, Los Angeles, CA 90046, USA",
+    "coordinates": [34.1292, -118.3677],
+    "visited": true
+  },
+  {
+    "name": "Cathedral of Our Lady of the Angels",
+    "address": "555 W Temple St, Los Angeles, CA 90012, USA",
+    "coordinates": [34.0576, -118.2469],
+    "visited": true
+  },
+  {
+    "name": "Theme Building (LAX)",
+    "address": "201 World Way, Los Angeles, CA 90045, USA",
+    "coordinates": [33.9425, -118.4081],
+    "visited": true
+  },
+  {
+    "name": "The Gamble House",
+    "address": "4 Westmoreland Pl, Pasadena, CA 91103, USA",
+    "coordinates": [34.1480, -118.1579],
+    "visited": true
+  }
+]
