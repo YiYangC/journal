@@ -24,10 +24,7 @@ export default async function TagPage(props: {
   return (
     <>
       <section className="p-[3rem] min-h-[40vh] flex flex-col justify-end">
-        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] mb-4">
-          <span className="mr-2">&mdash;</span>tagged
-        </p>
-        <h1 className="text-[clamp(2.5rem,9vw,7.25rem)] font-serif italic font-light leading-[0.8]">
+        <h1 className="text-[clamp(1.5rem,4vw,2.5rem)] font-serif italic font-light leading-tight">
           #{tag}
         </h1>
         <p className="mt-4 text-sm text-[var(--color-alt)]">

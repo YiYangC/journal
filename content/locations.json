@@ -9,7 +9,7 @@
     "name": "Chapelle Le Corbusier",
     "address": "Ronchamp, France",
     "coordinates": [47.7059, 6.6310],
-    "visited": false
+    "visited": true
   },
   {
     "name": "Fondation Beyeler",
@@ -100,7 +100,7 @@
     "name": "Katsura Imperial Villa",
     "address": "Nishikyo Ward, Kyoto, Japan",
     "coordinates": [34.9881, 135.6809],
-    "visited": false
+    "visited": true
   },
   {
     "name": "Tomba Brion",
@@ -191,7 +191,7 @@
     "name": "De Young Museum",
     "address": "50 Hagiwara Tea Garden Dr, San Francisco, CA 94118, USA",
     "coordinates": [37.7715, -122.4687],
-    "visited": false
+    "visited": true
   },
   {
     "name": "San Francisco Museum of Modern Art (SFMoMA)",
@@ -560,5 +560,17 @@
     "address": "4 Westmoreland Pl, Pasadena, CA 91103, USA",
     "coordinates": [34.1480, -118.1579],
     "visited": false
+  },
+  {
+    "name": "MFAH Beck Building (Rafael Moneo)",
+    "address": "5601 Main St, Houston, TX 77005, USA",
+    "coordinates": [29.7256, -95.3905],
+    "visited": true
+  },
+  {
+    "name": "MFAH Kinder Building (Steven Holl)",
+    "address": "1001 Bissonnet St, Houston, TX 77005, USA",
+    "coordinates": [29.7237, -95.3871],
+    "visited": true
   }
 ]

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { SelavyPhoto } from "@/lib/types";
 
@@ -18,7 +18,20 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export default function SelavyView({ photos }: SelavyViewProps) {
-  const [order, setOrder] = useState(() => shuffle(photos));
+  // Start with original order to match SSR, then shuffle on client
+  const [order, setOrder] = useState(photos);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setOrder(shuffle(photos));
+    setMounted(true);
+
+    // Prevent scrolling on this page
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [photos]);
 
   const reshuffle = useCallback(() => {
     setOrder(shuffle(photos));
@@ -48,15 +61,14 @@ export default function SelavyView({ photos }: SelavyViewProps) {
       {current && (
         <button
           onClick={advance}
-          className="relative max-h-[80vh] max-w-full cursor-pointer"
+          className="relative w-[90vw] h-[80vh] cursor-pointer"
         >
           <Image
             src={current.image}
             alt="Street photograph"
-            width={1600}
-            height={2400}
-            className="max-h-[80vh] w-auto object-contain"
-            sizes="100vw"
+            fill
+            className="object-contain"
+            sizes="90vw"
             priority
           />
         </button>

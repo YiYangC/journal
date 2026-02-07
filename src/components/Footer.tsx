@@ -1,6 +1,16 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
+  const pathname = usePathname();
+
+  // Hide footer on full-screen pages
+  if (pathname === "/selavy") {
+    return null;
+  }
+
   return (
     <footer className="p-[3rem] border-t border-[var(--color-border)]">
       <div className="flex flex-col md:flex-row justify-between items-center gap-4">
