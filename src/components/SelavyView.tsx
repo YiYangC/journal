@@ -48,7 +48,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
 
   if (photos.length === 0) {
     return (
-      <div className="flex items-center justify-center h-[calc(100vh-57px)]">
+      <div className="flex items-center justify-center h-[calc(100dvh-49px)]">
         <p className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
           No photographs yet
         </p>
@@ -57,24 +57,24 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   }
 
   return (
-    <div className="h-[calc(100vh-57px)] flex flex-col items-center justify-center relative px-4">
+    <div className="h-[calc(100dvh-49px)] flex flex-col items-center px-3 sm:px-4 pt-2 pb-2">
       {current && (
         <button
           onClick={advance}
-          className="relative w-[90vw] h-[80vh] cursor-pointer"
+          className="relative w-full flex-1 min-h-0 cursor-pointer"
         >
           <Image
             src={current.image}
             alt="Street photograph"
             fill
             className="object-contain"
-            sizes="90vw"
+            sizes="100vw"
             priority
           />
         </button>
       )}
 
-      <div className="absolute bottom-6 flex items-center gap-6">
+      <div className="flex items-center gap-6 shrink-0 pt-2">
         <button
           onClick={advance}
           className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors cursor-pointer"
