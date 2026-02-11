@@ -31,3 +31,17 @@ export interface SelavyPhoto {
   coordinates: [number, number]; // [latitude, longitude]
   date?: string;
 }
+
+export interface WritingFrontmatter {
+  title: string;
+  date: string;
+  excerpt: string;
+  tags?: string[];
+  coverImage?: string;
+}
+
+export interface Writing extends WritingFrontmatter {
+  slug: string;
+  content: string;
+  readingTime: string;
+}

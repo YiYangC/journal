@@ -188,12 +188,6 @@
     "visited": false
   },
   {
-    "name": "De Young Museum",
-    "address": "50 Hagiwara Tea Garden Dr, San Francisco, CA 94118, USA",
-    "coordinates": [37.7715, -122.4687],
-    "visited": true
-  },
-  {
     "name": "San Francisco Museum of Modern Art (SFMoMA)",
     "address": "151 3rd St, San Francisco, CA 94103, USA",
     "coordinates": [37.7857, -122.4011],

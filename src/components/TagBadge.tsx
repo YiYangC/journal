@@ -11,7 +11,7 @@ export default function TagBadge({ tag, clickable = true }: TagBadgeProps) {
 
   if (clickable) {
     return (
-      <Link href={`/tags/${tag.toLowerCase()}`} className={classes}>
+      <Link href={`/archive/${tag.toLowerCase()}`} className={classes}>
         {tag}
       </Link>
     );

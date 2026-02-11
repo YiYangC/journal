@@ -18,7 +18,7 @@ export default function ArticleCard({
 
   return (
     <Link
-      href={`/articles/${article.slug}`}
+      href={`/archive/${article.slug}`}
       className="article-card group block"
     >
       <div

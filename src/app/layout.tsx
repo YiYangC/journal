@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Yi Yang | Architecture & Travel",
+  title: "Yi Yang | yangyi.io",
   description:
-    "Architecture, design, and travel through the lens of Yi Yang",
+    "Exploring intersection between tech and design. Architecture, travel, and media.",
 };
 
 export default function RootLayout({

@@ -11,7 +11,7 @@ export default function MagazineSidebarCard({
 }: MagazineSidebarCardProps) {
   return (
     <Link
-      href={`/articles/${article.slug}`}
+      href={`/archive/${article.slug}`}
       className="group block"
     >
       <div className="overflow-hidden">
