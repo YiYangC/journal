@@ -2,27 +2,29 @@
 
 import DrawingCarousel from "./DrawingCarousel";
 
+const D = (name: string) => `https://concrete.yangyi.io/${name}`;
+
 const DETAIL_IMAGES = {
   row1: [
-    "/images/concrete/detail1.jpg",
-    "/images/concrete/detail8.jpg",
-    "/images/concrete/detail3.jpg",
-    "/images/concrete/detail4.jpg",
-    "/images/concrete/detail5.jpg",
+    D("detail1.267a7413.jpg"),
+    D("detail8.b1eb7dac.jpg"),
+    D("detail3.44a9ec42.jpg"),
+    D("detail4.a98b8652.jpg"),
+    D("detail5.c45c317b.jpg"),
   ],
   row2: [
-    "/images/concrete/detail6.jpg",
-    "/images/concrete/detail5.jpg",
-    "/images/concrete/detail7.jpg",
-    "/images/concrete/detail6.jpg",
-    "/images/concrete/detail9.jpg",
+    D("detail6.a8c05fd7.jpg"),
+    D("detail5.c45c317b.jpg"),
+    D("detail7.df5a6f61.jpg"),
+    D("detail6.a8c05fd7.jpg"),
+    D("detail9.89713571.jpg"),
   ],
   row3: [
-    "/images/concrete/detail9.jpg",
-    "/images/concrete/detail2.jpg",
-    "/images/concrete/detail9.jpg",
-    "/images/concrete/detail1.jpg",
-    "/images/concrete/detail9.jpg",
+    D("detail9.89713571.jpg"),
+    D("detail2.1cc62ae7.jpg"),
+    D("detail9.89713571.jpg"),
+    D("detail1.267a7413.jpg"),
+    D("detail9.89713571.jpg"),
   ],
 };
 
