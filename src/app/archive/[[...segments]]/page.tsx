@@ -1,30 +1,90 @@
 import { compileMDX } from "next-mdx-remote/rsc";
 import Image from "next/image";
-import { getArticleBySlug, getArticleSlugs } from "@/lib/articles";
+import {
+  getAllArticles,
+  getArticleBySlug,
+  getArticleSlugs,
+  getArticlesByCategory,
+  getAllCategories,
+} from "@/lib/articles";
+import MagazineGrid from "@/components/MagazineGrid";
+import ArticleCard from "@/components/ArticleCard";
 import TagBadge from "@/components/TagBadge";
 import PhotoGrid from "@/components/PhotoGrid";
 import type { Metadata } from "next";
 
+const CATEGORIES = new Set(["architecture", "ephemeral"]);
+
 export async function generateStaticParams() {
-  return getArticleSlugs().map((slug) => ({ slug }));
+  const slugs = getArticleSlugs().map((slug) => ({ segments: [slug] }));
+  const categories = getAllCategories().map((cat) => ({
+    segments: [cat],
+  }));
+  return [{ segments: [] }, ...categories, ...slugs];
 }
 
 export async function generateMetadata(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ segments?: string[] }>;
 }): Promise<Metadata> {
-  const { slug } = await props.params;
-  const article = getArticleBySlug(slug);
+  const { segments } = await props.params;
+
+  if (!segments || segments.length === 0) {
+    return { title: "Archive | Yi Yang" };
+  }
+
+  const [segment] = segments;
+
+  if (CATEGORIES.has(segment) || getAllCategories().includes(segment)) {
+    return { title: `${segment.charAt(0).toUpperCase() + segment.slice(1)} | Yi Yang` };
+  }
+
+  const article = getArticleBySlug(segment);
   return {
     title: `${article.title} | Yi Yang`,
     description: article.excerpt,
   };
 }
 
-export default async function ArticlePage(props: {
-  params: Promise<{ slug: string }>;
+export default async function ArchivePage(props: {
+  params: Promise<{ segments?: string[] }>;
 }) {
-  const { slug } = await props.params;
-  const article = getArticleBySlug(slug);
+  const { segments } = await props.params;
+
+  // No segments → magazine grid (homepage)
+  if (!segments || segments.length === 0) {
+    const articles = getAllArticles();
+    return <MagazineGrid articles={articles} />;
+  }
+
+  const [segment] = segments;
+
+  // Category filter
+  if (CATEGORIES.has(segment) || getAllCategories().includes(segment)) {
+    const articles = getArticlesByCategory(segment);
+    return (
+      <>
+        <section className="p-[3rem] min-h-[40vh] flex flex-col justify-end">
+          <h1 className="text-[clamp(1.5rem,4vw,2.5rem)] font-serif italic font-light leading-tight">
+            {segment}
+          </h1>
+          <p className="mt-4 text-sm text-[var(--color-alt)]">
+            {articles.length} article{articles.length !== 1 ? "s" : ""}
+          </p>
+        </section>
+
+        <section className="p-[3rem]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <ArticleCard key={article.slug} article={article} />
+            ))}
+          </div>
+        </section>
+      </>
+    );
+  }
+
+  // Article detail
+  const article = getArticleBySlug(segment);
   const { content } = await compileMDX({
     source: article.content,
     options: { parseFrontmatter: false },

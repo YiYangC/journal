@@ -4,7 +4,7 @@ import { useState } from "react";
 import ArticleCard from "./ArticleCard";
 import { Article } from "@/lib/types";
 
-const CATEGORIES = ["all", "architecture", "design", "travel"] as const;
+const CATEGORIES = ["all", "architecture", "ephemeral"] as const;
 
 interface ArticlesContentProps {
   articles: Article[];

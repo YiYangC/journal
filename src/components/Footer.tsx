@@ -7,7 +7,7 @@ export default function Footer() {
   const pathname = usePathname();
 
   // Hide footer on full-screen pages
-  if (pathname === "/selavy") {
+  if (pathname === "/selavy" || pathname === "/projects/concrete-memories") {
     return null;
   }
 
@@ -27,13 +27,13 @@ export default function Footer() {
             Instagram
           </a>
           <Link
-            href="https://concrete.yangyi.io"
+            href="/projects/concrete-memories"
             className="text-sm text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors"
           >
             Portfolio
           </Link>
           <Link
-            href="https://writings.yangyi.io"
+            href="/writings"
             className="text-sm text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors"
           >
             Writings
