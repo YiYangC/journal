@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 
-const CATEGORY_LINKS = [
-  { href: "/tags/architecture", label: "Architecture" },
-  { href: "/tags/ephemeral", label: "Ephemeral" },
+const LEFT_LINKS = [
+  { href: "/archive", label: "Archive" },
+  { href: "/projects", label: "Projects" },
+  { href: "/writings", label: "Writings" },
   { href: "/selavy", label: "Selavy" },
 ];
 
-const UTILITY_LINKS = [
+const RIGHT_LINKS = [
   { href: "/map", label: "Map" },
   { href: "/about", label: "About" },
 ];
@@ -18,17 +19,20 @@ const UTILITY_LINKS = [
 export default function Navigation() {
   const pathname = usePathname();
 
+  const isActive = (href: string) =>
+    pathname === href || pathname.startsWith(href + "/");
+
   return (
     <header className="border-b border-[var(--color-border)]">
       <nav className="grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3">
-        {/* Left — Category links */}
+        {/* Left — Nav links */}
         <div className="flex items-center gap-4 md:gap-6">
-          {CATEGORY_LINKS.map((link) => (
+          {LEFT_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={`text-[10px] md:text-xs uppercase tracking-[0.15em] transition-colors ${
-                pathname === link.href
+                isActive(link.href)
                   ? "text-[var(--color-text)]"
                   : "text-[var(--color-link)] hover:text-[var(--color-link-hover)]"
               }`}
@@ -48,12 +52,12 @@ export default function Navigation() {
 
         {/* Right — Utility links + theme toggle */}
         <div className="flex items-center justify-end gap-4 md:gap-6">
-          {UTILITY_LINKS.map((link) => (
+          {RIGHT_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={`text-[10px] md:text-xs uppercase tracking-[0.15em] transition-colors hidden sm:inline ${
-                pathname === link.href
+                isActive(link.href)
                   ? "text-[var(--color-text)]"
                   : "text-[var(--color-link)] hover:text-[var(--color-link-hover)]"
               }`}

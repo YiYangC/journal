@@ -49,3 +49,15 @@ export function getAllTags(): string[] {
   getAllArticles().forEach((a) => a.tags.forEach((t) => tags.add(t)));
   return Array.from(tags).sort();
 }
+
+export function getArticlesByCategory(category: string): Article[] {
+  return getAllArticles().filter(
+    (a) => a.category.toLowerCase() === category.toLowerCase()
+  );
+}
+
+export function getAllCategories(): string[] {
+  const cats = new Set<string>();
+  getAllArticles().forEach((a) => cats.add(a.category));
+  return Array.from(cats).sort();
+}

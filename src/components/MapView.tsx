@@ -266,7 +266,7 @@ export default function MapView({ articles, locations, selavyPhotos = [] }: MapV
             maxWidth="280px"
           >
             <Link
-              href={`/articles/${selectedArticle.slug}`}
+              href={`/archive/${selectedArticle.slug}`}
               className="block group"
             >
               <div className="relative w-full aspect-[3/2] overflow-hidden mb-2">

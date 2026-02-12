@@ -47,7 +47,7 @@ export default function MagazineFeaturedCard({
 
             {isExpanded && (
               <div className="px-5 pb-5 md:px-6 md:pb-6">
-                <Link href={`/articles/${article.slug}`} className="block group">
+                <Link href={`/archive/${article.slug}`} className="block group">
                   <div className="overflow-hidden">
                     <Image
                       src={article.coverImage}

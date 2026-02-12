@@ -9,6 +9,8 @@ export default function cloudinaryLoader({
   width: number;
   quality?: number;
 }) {
+  if (src.startsWith("http")) return src;
+
   const params = [
     "f_auto",
     "c_limit",
