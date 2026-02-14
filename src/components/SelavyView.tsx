@@ -61,7 +61,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
       {current && (
         <button
           onClick={advance}
-          className="relative w-full flex-1 min-h-0 cursor-pointer"
+          className="relative w-full flex-1 min-h-0 cursor-pointer overflow-hidden"
         >
           <Image
             src={current.image}
