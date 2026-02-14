@@ -32,7 +32,7 @@ export default function AboutPage() {
         </h1>
       </section>
 
-      <section className="p-[3rem] max-w-3xl section--numbered">
+      <section className="p-[3rem] max-w-3xl ">
         <p className="text-[clamp(1rem,4vw,1.9rem)] leading-relaxed mb-8">
           Exploring intersection between tech and design. Obsessed with the
           nature of media.
@@ -44,33 +44,13 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="p-[3rem] max-w-3xl section--numbered">
-        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] leading-relaxed mb-8">
+      <section className="p-[3rem] max-w-3xl ">
+        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] leading-relaxed">
           Architecture, design, and travel through the lens of material and
           memory. This journal documents encounters with the built environment
           across continents, tracing the quiet presence of concrete, stone,
           wood, and light.
         </p>
-        <nav className="flex flex-wrap gap-6">
-          <Link
-            href="/archive"
-            className="text-sm uppercase tracking-[0.15em] text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors"
-          >
-            Archive
-          </Link>
-          <Link
-            href="/projects/concrete-memories"
-            className="text-sm uppercase tracking-[0.15em] text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors"
-          >
-            Concrete Memories
-          </Link>
-          <Link
-            href="/writings"
-            className="text-sm uppercase tracking-[0.15em] text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors"
-          >
-            Writings
-          </Link>
-        </nav>
       </section>
     </>
   );

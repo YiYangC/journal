@@ -5,19 +5,11 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "/archive/villa-savoye", label: "Villa Savoye" },
-  { href: "/archive/ronchamp", label: "Ronchamp" },
-  { href: "/archive/sf-de-young", label: "de Young Museum" },
-  { href: "/archive/seattle-central-library", label: "Seattle Central Library" },
-  { href: "/archive/vitra-campus", label: "Vitra Campus" },
-  { href: "/archive/kyoto-katsura", label: "Katsura Imperial Villa" },
-  { href: "/archive/twa-flight-center", label: "TWA Flight Center" },
-  { href: "/archive/schindler-house", label: "Schindler House" },
-  { href: "/archive/villa-la-roche", label: "Villa La Roche" },
-  { href: "/archive/fondazione-querini-stampalia", label: "Querini Stampalia" },
-  { href: "/archive/palais-de-tokyo", label: "Palais de Tokyo" },
-  { href: "/writings", label: "Writings" },
+  { href: "/archive", label: "Archive" },
+  { href: "/studies", label: "Studies" },
   { href: "/selavy", label: "Selavy" },
+  { href: "/map", label: "Map" },
+  { href: "/about", label: "About" },
 ];
 
 export default function Footer() {

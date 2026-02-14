@@ -42,11 +42,19 @@ export default function Navigation() {
         </div>
 
         {/* Center/Right — Brand (right-aligned on mobile, centered on desktop) */}
+        {/* Mobile: Link to About */}
         <Link
           href="/about"
-          className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-right md:text-center px-6 md:px-6"
+          className="md:hidden text-base font-bold uppercase tracking-[0.2em] text-right px-6"
         >
-          Yi Yang<span className="hidden md:inline">&nbsp;杨 艺</span>
+          Yi Yang
+        </Link>
+        {/* Desktop: Link to Archive */}
+        <Link
+          href="/archive"
+          className="hidden md:block text-lg font-bold uppercase tracking-[0.2em] text-center px-6"
+        >
+          Yi Yang&nbsp;杨 艺
         </Link>
 
         {/* Right — Utility links + theme toggle (hidden on mobile) */}
