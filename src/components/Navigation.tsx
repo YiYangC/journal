@@ -44,7 +44,7 @@ export default function Navigation() {
         {/* Center — Brand */}
         <Link
           href="/"
-          className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-center px-6"
+          className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-right px-6"
         >
           Yi Yang<span className="hidden md:inline">&nbsp;杨 艺</span>
         </Link>
@@ -64,7 +64,9 @@ export default function Navigation() {
               {link.label}
             </Link>
           ))}
-          <ThemeToggle />
+          <div className="hidden sm:block">
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
     </header>
