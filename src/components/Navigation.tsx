@@ -6,7 +6,6 @@ import ThemeToggle from "./ThemeToggle";
 
 const LEFT_LINKS = [
   { href: "/archive", label: "Archive" },
-  { href: "/projects", label: "Projects" },
   { href: "/writings", label: "Writings" },
   { href: "/selavy", label: "Selavy" },
 ];
@@ -47,7 +46,7 @@ export default function Navigation() {
           href="/"
           className="text-base md:text-lg font-bold uppercase tracking-[0.2em] text-center px-6"
         >
-          Yi Yang &nbsp;杨 艺
+          Yi Yang<span className="hidden md:inline">&nbsp;杨 艺</span>
         </Link>
 
         {/* Right — Utility links + theme toggle */}
