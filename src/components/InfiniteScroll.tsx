@@ -10,7 +10,7 @@ interface InfiniteScrollProps {
 export default function InfiniteScroll({ children, className = "" }: InfiniteScrollProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const animationFrameRef = useRef<number>();
+  const animationFrameRef = useRef<number | undefined>(undefined);
   const clonesHeightRef = useRef(0);
   const scrollHeightRef = useRef(0);
 
