@@ -6,7 +6,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const LEFT_LINKS = [
   { href: "/archive", label: "Archive" },
-  { href: "/writings", label: "Writings" },
+  { href: "/studies", label: "Studies" },
   { href: "/selavy", label: "Selavy" },
 ];
 
