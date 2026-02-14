@@ -24,7 +24,7 @@ export default function MagazineSidebarCard({
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
         />
       </div>
-      <div className="p-4 md:p-5">
+      <div className="hidden md:block p-4 md:p-5">
         <h2 className="magazine-card__title text-sm md:text-base">
           {article.title}
         </h2>
