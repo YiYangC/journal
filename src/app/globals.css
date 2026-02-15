@@ -444,136 +444,43 @@ a:hover {
   text-align: center;
 }
 
-/* ---- Film strip (Selavy) ---- */
-.film-strip {
-  --perf-size: 10px;
-  --perf-gap: 6px;
-  --rail-height: 22px;
-  --border-w: 2px;
-  position: relative;
-  border: var(--border-w) solid #444;
-  border-radius: 3px;
-  background: #111;
+/* ---- Selavy shutter transition ---- */
+.selavy-frame {
+  animation: shutterIn 0.35s ease-out both;
 }
 
-/* Sprocket-hole rails */
-.film-strip::before,
-.film-strip::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: var(--rail-height);
-  background: repeating-linear-gradient(
-    90deg,
-    transparent 0,
-    transparent var(--perf-gap),
-    #333 var(--perf-gap),
-    #333 calc(var(--perf-gap) + var(--perf-size)),
-    transparent calc(var(--perf-gap) + var(--perf-size))
-  );
-  pointer-events: none;
-  z-index: 10;
-}
-
-.film-strip::before {
-  top: 0;
-}
-.film-strip::after {
-  bottom: 0;
-}
-
-/* Sprocket holes punched out */
-.film-perf-top,
-.film-perf-bottom {
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: var(--rail-height);
-  display: flex;
-  justify-content: center;
-  gap: calc(var(--perf-gap) + 2px);
-  pointer-events: none;
-  z-index: 11;
-  overflow: hidden;
-}
-
-.film-perf-top {
-  top: 0;
-}
-.film-perf-bottom {
-  bottom: 0;
-}
-
-.film-perf-top span,
-.film-perf-bottom span {
-  flex-shrink: 0;
-  width: var(--perf-size);
-  height: calc(var(--perf-size) + 2px);
-  margin-top: calc((var(--rail-height) - var(--perf-size)) / 2 - 1px);
-  border-radius: 2px;
-  background: #000;
-  box-shadow: inset 0 0 1px rgba(255, 255, 255, 0.08);
-}
-
-/* Inner window where photo lives */
-.film-window {
-  margin: var(--rail-height) 0;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Frame code text */
-.film-code {
-  position: absolute;
-  right: 8px;
-  font-family: "Courier New", monospace;
-  font-size: 9px;
-  letter-spacing: 0.08em;
-  color: #c65d07;
-  z-index: 12;
-  pointer-events: none;
-  text-shadow: 0 0 3px rgba(198, 93, 7, 0.4);
-}
-
-.film-code--top {
-  top: 5px;
-}
-
-.film-code--bottom {
-  bottom: 5px;
-}
-
-/* Slide transition */
-.film-slide-enter {
-  animation: filmPull 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes filmPull {
+@keyframes shutterIn {
   0% {
-    transform: translateY(100%);
-    opacity: 0.6;
+    opacity: 0;
   }
-  60% {
+  100% {
+    opacity: 1;
+  }
+}
+
+.selavy-shutter {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.selavy-shutter--active {
+  animation: shutterFlash 0.35s ease-in-out both;
+}
+
+@keyframes shutterFlash {
+  0% {
+    opacity: 0;
+  }
+  40% {
     opacity: 1;
   }
   100% {
-    transform: translateY(0);
-    opacity: 1;
+    opacity: 0;
   }
-}
-
-/* Subtle film grain overlay */
-.film-grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 128px 128px;
-  pointer-events: none;
-  z-index: 5;
-  mix-blend-mode: overlay;
 }
 
 /* ---- Prose overrides ---- */
