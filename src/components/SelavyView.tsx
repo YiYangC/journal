@@ -33,10 +33,6 @@ export default function SelavyView({ photos }: SelavyViewProps) {
     };
   }, [photos]);
 
-  const reshuffle = useCallback(() => {
-    setOrder(shuffle(photos));
-  }, [photos]);
-
   const current = order[0] ?? null;
 
   const advance = useCallback(() => {
@@ -75,21 +71,9 @@ export default function SelavyView({ photos }: SelavyViewProps) {
       )}
 
       <div className="flex items-center gap-6 shrink-0 pt-2">
-        <button
-          onClick={advance}
-          className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors cursor-pointer"
-        >
-          Next
-        </button>
         <span className="text-[10px] text-[var(--color-alt)]">
           {photos.length - order.length + 1} / {photos.length}
         </span>
-        <button
-          onClick={reshuffle}
-          className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] hover:text-[var(--color-text)] transition-colors cursor-pointer"
-        >
-          Shuffle
-        </button>
       </div>
     </div>
   );
