@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import { SelavyPhoto } from "@/lib/types";
 
@@ -17,12 +17,19 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
+/* deterministic-ish rotation from an index seed */
+function seededRotation(seed: number, range: number): number {
+  const x = Math.sin(seed * 9301 + 49297) * 233280;
+  return (x - Math.floor(x) - 0.5) * 2 * range;
+}
+
+const STACK_SIZE = 4;
+
 export default function SelavyView({ photos }: SelavyViewProps) {
   const [order, setOrder] = useState(photos);
   const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const [animKey, setAnimKey] = useState(0);
-  const [shutterActive, setShutterActive] = useState(false);
+  const [swiping, setSwiping] = useState<"left" | "right" | null>(null);
   const transitioning = useRef(false);
 
   useEffect(() => {
@@ -37,46 +44,43 @@ export default function SelavyView({ photos }: SelavyViewProps) {
 
   const current = order[index] ?? null;
 
-  const goTo = useCallback(
-    (next: number) => {
+  /* stable per-position rotations */
+  const rotations = useMemo(
+    () => order.map((_, i) => seededRotation(i, 4)),
+    [order],
+  );
+
+  const navigate = useCallback(
+    (dir: "left" | "right") => {
       if (transitioning.current) return;
       transitioning.current = true;
-      setShutterActive(true);
+      setSwiping(dir);
 
       setTimeout(() => {
-        setAnimKey((k) => k + 1);
-        setIndex(next);
-      }, 140);
-
-      setTimeout(() => {
-        setShutterActive(false);
+        if (dir === "right") {
+          if (index >= order.length - 1) {
+            setOrder(shuffle(photos));
+            setIndex(0);
+          } else {
+            setIndex(index + 1);
+          }
+        } else {
+          setIndex(index <= 0 ? order.length - 1 : index - 1);
+        }
+        setSwiping(null);
         transitioning.current = false;
-      }, 350);
+      }, 320);
     },
-    [],
+    [index, order.length, photos],
   );
 
   const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
+    (e: React.MouseEvent<HTMLDivElement>) => {
       const rect = e.currentTarget.getBoundingClientRect();
       const x = e.clientX - rect.left;
-      const isLeft = x < rect.width / 2;
-
-      if (isLeft) {
-        // Go back — wrap to end
-        const next = index <= 0 ? order.length - 1 : index - 1;
-        goTo(next);
-      } else {
-        // Go forward — reshuffle at end
-        if (index >= order.length - 1) {
-          setOrder(shuffle(photos));
-          goTo(0);
-        } else {
-          goTo(index + 1);
-        }
-      }
+      navigate(x < rect.width / 2 ? "left" : "right");
     },
-    [index, order.length, photos, goTo],
+    [navigate],
   );
 
   if (photos.length === 0) {
@@ -89,34 +93,62 @@ export default function SelavyView({ photos }: SelavyViewProps) {
     );
   }
 
+  /* build visible stack — rendered back-to-front */
+  const cards: React.ReactNode[] = [];
+
+  for (let depth = STACK_SIZE - 1; depth >= 0; depth--) {
+    const photoIdx = (index + depth) % order.length;
+    const photo = order[photoIdx];
+    if (!photo) continue;
+
+    const isTop = depth === 0;
+    const rot = isTop ? 0 : rotations[(photoIdx + depth) % rotations.length];
+    const scale = 1 - depth * 0.018;
+    const yShift = depth * -3;
+
+    const swipeClass =
+      isTop && swiping
+        ? swiping === "right"
+          ? "photo-stack-swipe-right"
+          : "photo-stack-swipe-left"
+        : "";
+
+    cards.push(
+      <div
+        key={`${photoIdx}-${depth}`}
+        className={`photo-stack-card ${swipeClass}`}
+        style={
+          isTop && swiping
+            ? { zIndex: STACK_SIZE - depth }
+            : {
+                transform: `rotate(${rot}deg) scale(${scale}) translateY(${yShift}px)`,
+                zIndex: STACK_SIZE - depth,
+              }
+        }
+      >
+        <Image
+          src={photo.image}
+          alt="Street photograph"
+          fill
+          className="object-contain"
+          sizes="100vw"
+          priority={isTop}
+        />
+      </div>,
+    );
+  }
+
   return (
     <div className="h-[calc(100dvh-49px)] flex flex-col items-center px-3 sm:px-4 pt-2 pb-2">
-      {current && (
-        <button
-          onClick={handleClick}
-          className="relative w-full flex-1 min-h-0 cursor-pointer overflow-hidden"
-        >
-          <div
-            key={animKey}
-            className="selavy-frame w-full h-full relative"
-          >
-            <Image
-              src={current.image}
-              alt="Street photograph"
-              fill
-              className="object-contain"
-              sizes="100vw"
-              priority
-            />
-          </div>
+      {/* stack area */}
+      <div
+        onClick={handleClick}
+        className="relative w-full flex-1 min-h-0 cursor-pointer"
+      >
+        {mounted && cards}
+      </div>
 
-          {/* Black shutter overlay */}
-          <div
-            className={`selavy-shutter ${shutterActive ? "selavy-shutter--active" : ""}`}
-          />
-        </button>
-      )}
-
+      {/* info bar */}
       <div className="flex items-center justify-between w-full shrink-0 py-3">
         <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
           {current?.date

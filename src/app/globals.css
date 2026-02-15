@@ -444,41 +444,42 @@ a:hover {
   text-align: center;
 }
 
-/* ---- Selavy shutter transition ---- */
-.selavy-frame {
-  animation: shutterIn 0.35s ease-out both;
-}
-
-@keyframes shutterIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-.selavy-shutter {
+/* ---- Selavy photo-stack ---- */
+.photo-stack-card {
   position: absolute;
   inset: 0;
-  background: #000;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
 }
 
-.selavy-shutter--active {
-  animation: shutterFlash 0.35s ease-in-out both;
+.photo-stack-swipe-right {
+  animation: stackSwipeRight 0.32s ease-in both;
 }
 
-@keyframes shutterFlash {
+.photo-stack-swipe-left {
+  animation: stackSwipeLeft 0.32s ease-in both;
+}
+
+@keyframes stackSwipeRight {
   0% {
-    opacity: 0;
-  }
-  40% {
+    transform: rotate(0deg) translateX(0);
     opacity: 1;
   }
   100% {
+    transform: rotate(12deg) translateX(110%);
+    opacity: 0;
+  }
+}
+
+@keyframes stackSwipeLeft {
+  0% {
+    transform: rotate(0deg) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-12deg) translateX(-110%);
     opacity: 0;
   }
 }
