@@ -37,20 +37,6 @@ export default function AboutPage() {
           Exploring intersection between tech and design. Obsessed with the
           nature of media.
         </p>
-        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] leading-relaxed">
-          Yi Yang is a designer and writer based between New York and Tokyo. Her
-          work explores the intersection of architecture, materiality, and
-          place.
-        </p>
-      </section>
-
-      <section className="p-[3rem] max-w-3xl ">
-        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] leading-relaxed">
-          Architecture, design, and travel through the lens of material and
-          memory. This journal documents encounters with the built environment
-          across continents, tracing the quiet presence of concrete, stone,
-          wood, and light.
-        </p>
       </section>
     </>
   );
