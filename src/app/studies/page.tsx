@@ -1,81 +1,74 @@
-import Link from "next/link";
-import { getAllWritings } from "@/lib/writings";
+import WritingsMenu from "@/components/WritingsMenu";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Studies | Yi Yang",
-  description: "Selected projects and essays on architecture, technology, media, and design.",
+  description:
+    "Selected projects and essays on architecture, technology, media, and design.",
 };
 
-const PROJECTS = [
+const ITEMS = [
   {
     slug: "concrete-memories",
     title: "Concrete Memories",
-    description:
-      "For a material that takes the form of its form, that contours the texture from the surface of what it forms against, Concrete was never brutal, nor rough to me.",
-    year: "2022",
-    type: "project" as const,
+    href: "/projects/concrete-memories",
+    category: "project",
+  },
+  {
+    slug: "where-did-the-wires-go",
+    title: "Where Did the Wires Go?",
+    href: "/writings/where-did-the-wires-go",
+    category: "product",
+  },
+  {
+    slug: "what-is-archive",
+    title: "What is Archive",
+    href: "/writings/what-is-archive",
+  },
+  {
+    slug: "theater-sets-redux",
+    title: "Theater Sets Redux",
+    href: "/writings/theater-sets-redux",
+    category: "design",
+  },
+  {
+    slug: "choreography-and-city",
+    title: "Choreography & City",
+    href: "/writings/choreography-and-city",
+    category: "architecture",
+  },
+  {
+    slug: "hitchcockian-threshold",
+    title: "The Hitchcockian Threshold",
+    href: "/writings/hitchcockian-threshold",
+    category: "film",
+  },
+  {
+    slug: "all-the-worlds-a-stage",
+    title: "All the World's a Stage",
+    href: "/writings/all-the-worlds-a-stage",
+    category: "design",
+  },
+  {
+    slug: "customers-and-users",
+    title: "Customers & Users",
+    href: "/writings/customers-and-users",
+    category: "product",
+  },
+  {
+    slug: "museum-as-an-archive",
+    title: "Museum as an Archive",
+    href: "/writings/museum-as-an-archive",
+    category: "architecture",
+  },
+  {
+    slug: "curated-by-grandpa",
+    title: "Curated by Grandpa",
+    href: "/writings/curated-by-grandpa",
+    category: "design",
   },
 ];
 
 export default function StudiesPage() {
-  const writings = getAllWritings().map((w) => ({ ...w, type: "writing" as const }));
-
-  // Combine and sort by date
-  const allStudies = [
-    ...PROJECTS.map(p => ({ ...p, date: `${p.year}-01-01` })),
-    ...writings
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return (
-    <>
-      <section className="p-[3rem] min-h-[40vh] flex flex-col justify-end">
-        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] mb-4">
-          <span className="mr-2">&mdash;</span>selected work
-        </p>
-        <h1 className="text-[clamp(2.5rem,9vw,7.25rem)] font-serif italic font-light leading-[0.8]">
-          Studies
-        </h1>
-      </section>
-
-      <section className="p-[3rem] max-w-3xl">
-        <div className="flex flex-col">
-          {allStudies.map((item) => {
-            const isProject = item.type === "project";
-            const href = isProject ? `/projects/${item.slug}` : `/writings/${item.slug}`;
-
-            return (
-              <Link
-                key={item.slug}
-                href={href}
-                className="group py-6 border-b border-[var(--color-border)] block"
-              >
-                <div className="flex items-baseline justify-between gap-4 mb-2">
-                  <h2 className="text-lg md:text-xl font-bold uppercase tracking-[0.02em] leading-tight group-hover:text-[var(--color-link-hover)] transition-colors">
-                    {item.title}
-                  </h2>
-                  <time className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] shrink-0">
-                    {isProject
-                      ? item.year
-                      : new Date(item.date).toLocaleDateString("en-US", {
-                          year: "numeric",
-                          month: "short",
-                        })}
-                  </time>
-                </div>
-                <p className="text-sm text-[var(--color-alt)] font-serif italic leading-relaxed">
-                  {isProject ? (item as any).description : (item as any).excerpt}
-                </p>
-                {!isProject && (
-                  <span className="text-[10px] uppercase tracking-[0.15em] text-[var(--color-alt)] mt-2 inline-block">
-                    {item.readingTime}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-    </>
-  );
+  return <WritingsMenu items={ITEMS} />;
 }

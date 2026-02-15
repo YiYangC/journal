@@ -453,3 +453,109 @@ a:hover {
   --tw-prose-code: var(--color-text);
   --tw-prose-pre-bg: var(--color-surface);
 }
+
+/* ---- Writings menu ---- */
+.writings-menu {
+  width: 100%;
+  height: calc(100vh - 52px);
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.writings-menu::-webkit-scrollbar {
+  display: none;
+}
+
+.writings-menu__item {
+  flex: none;
+  margin-right: 25vw;
+  padding: 0 2rem 0 0;
+}
+
+.writings-menu__link {
+  white-space: nowrap;
+  position: relative;
+  cursor: pointer;
+  font-size: 6vh;
+  padding: 1.5vh 0;
+  display: block;
+  color: var(--color-text);
+  transition: transform 0.2s;
+  text-decoration: none;
+}
+
+.writings-menu__link:hover {
+  font-style: italic;
+  transform: translate3d(1rem, 0, 0);
+  color: var(--color-alt);
+}
+
+.writings-menu__link::before {
+  content: '';
+  top: 55%;
+  width: 3rem;
+  height: 1px;
+  background: currentColor;
+  position: absolute;
+  right: calc(100% + 2rem);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.writings-menu__link:hover::before {
+  opacity: 1;
+}
+
+/* Category labels on hover (desktop only) */
+@media screen and (min-width: 768px) {
+  .writings-menu__link--project:hover::after {
+    content: 'project';
+  }
+  .writings-menu__link--product:hover::after {
+    content: 'product';
+  }
+  .writings-menu__link--design:hover::after {
+    content: 'design';
+  }
+  .writings-menu__link--architecture:hover::after {
+    content: 'architecture';
+  }
+  .writings-menu__link--film:hover::after {
+    content: 'film';
+  }
+  .writings-menu__link:hover::after {
+    position: absolute;
+    top: 0;
+    left: calc(100% + 2rem);
+    font-size: 1.5rem;
+    color: var(--color-alt);
+  }
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+  .writings-menu {
+    min-height: auto;
+    padding: 2rem 0;
+  }
+  .writings-menu__item {
+    margin-right: 1rem;
+    padding: 0;
+  }
+  .writings-menu__link {
+    font-size: 6vw;
+    padding: 0.5rem;
+  }
+  .writings-menu__link::before {
+    width: 0.8rem;
+    right: calc(100% + 1rem);
+  }
+}
