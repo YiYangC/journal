@@ -444,6 +444,45 @@ a:hover {
   text-align: center;
 }
 
+/* ---- Selavy shutter transition ---- */
+.selavy-frame {
+  animation: shutterIn 0.35s ease-out both;
+}
+
+@keyframes shutterIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.selavy-shutter {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.selavy-shutter--active {
+  animation: shutterFlash 0.35s ease-in-out both;
+}
+
+@keyframes shutterFlash {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 /* ---- Prose overrides ---- */
 .prose {
   --tw-prose-body: var(--color-text);
