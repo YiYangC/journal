@@ -20,7 +20,13 @@ export default function Footer() {
     setRandomLink(links[Math.floor(Math.random() * links.length)]);
   }, []);
 
-  if (pathname === "/selavy" || pathname === "/projects/concrete-memories") {
+  if (
+    pathname === "/selavy" ||
+    pathname === "/projects/concrete-memories" ||
+    pathname === "/studies" ||
+    pathname === "/writings" ||
+    pathname === "/map"
+  ) {
     return null;
   }
 

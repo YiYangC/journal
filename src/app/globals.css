@@ -45,6 +45,11 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -452,6 +457,12 @@ a:hover {
   --tw-prose-hr: var(--color-border);
   --tw-prose-code: var(--color-text);
   --tw-prose-pre-bg: var(--color-surface);
+}
+
+/* Prevent body scroll on full-viewport pages */
+body:has(.writings-menu),
+body:has(.mapboxgl-map) {
+  overflow: hidden;
 }
 
 /* ---- Writings menu ---- */

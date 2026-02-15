@@ -23,7 +23,7 @@ export default function Navigation() {
 
   return (
     <header className="border-b border-[var(--color-border)]">
-      <nav className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-4 py-3">
+      <nav className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center px-4 py-4">
         {/* Left — Nav links */}
         <div className="flex items-center gap-4 md:gap-6">
           {LEFT_LINKS.map((link) => (

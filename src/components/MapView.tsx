@@ -27,6 +27,7 @@ export default function MapView({ articles, locations, selavyPhotos = [] }: MapV
   const [indexOpen, setIndexOpen] = useState(false);
   const mapRef = useRef<MapRef>(null);
 
+
   const selectedArticle = useMemo(
     () =>
       selected?.type === "article"
@@ -136,7 +137,7 @@ export default function MapView({ articles, locations, selavyPhotos = [] }: MapV
   );
 
   return (
-    <div className="w-full h-[calc(100vh-57px)] relative">
+    <div className="w-full h-[calc(100dvh-38px)] relative">
       <Map
         ref={mapRef}
         initialViewState={initialViewState}
