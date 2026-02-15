@@ -70,8 +70,8 @@ export default function SelavyView({ photos }: SelavyViewProps) {
         </button>
       )}
 
-      <div className="flex items-center gap-6 shrink-0 pt-2">
-        <span className="text-[10px] text-[var(--color-alt)]">
+      <div className="flex items-center gap-6 shrink-0 py-3">
+        <span className="text-sm leading-normal text-[var(--color-alt)]">
           {photos.length - order.length + 1} / {photos.length}
         </span>
       </div>
