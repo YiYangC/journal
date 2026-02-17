@@ -487,6 +487,13 @@ a:hover {
   .storyboard-frame:hover {
     width: min(85vw, 60vh * 1.2);
   }
+  .storyboard-frame:hover .storyboard-frame__img {
+    border-color: #444;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  }
+  .storyboard-frame:hover .storyboard-frame__img img {
+    filter: brightness(1.08);
+  }
 }
 
 .storyboard-frame__img {
@@ -494,6 +501,13 @@ a:hover {
   flex: 1;
   min-height: 0;
   border: 1px solid #222;
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.storyboard-frame__img img {
+  transition: filter 0.5s ease;
 }
 
 /* Caption block below each frame */
@@ -513,6 +527,7 @@ a:hover {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #999;
+  transition: color 0.5s ease;
 }
 
 .storyboard-frame__scene {
@@ -522,6 +537,16 @@ a:hover {
   line-height: 1.45;
   color: #666;
   max-width: 28ch;
+  transition: color 0.5s ease;
+}
+
+@media (min-width: 641px) {
+  .storyboard-frame:hover .storyboard-frame__slugline {
+    color: #bbb;
+  }
+  .storyboard-frame:hover .storyboard-frame__scene {
+    color: #888;
+  }
 }
 
 /* End spacer */
