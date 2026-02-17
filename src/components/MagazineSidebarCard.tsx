@@ -12,7 +12,7 @@ export default function MagazineSidebarCard({
   return (
     <Link
       href={`/archive/${article.slug}`}
-      className="group block"
+      className="group block border-b border-[var(--color-border)]"
     >
       <div className="overflow-hidden">
         <Image
