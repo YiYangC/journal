@@ -477,6 +477,16 @@ a:hover {
   width: min(85vw, 60vh * 0.67);
   padding-top: 0;
   padding-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+@media (min-width: 641px) {
+  .storyboard-frame {
+    transition: width 0.5s cubic-bezier(0.2, 1, 0.7, 1);
+  }
+  .storyboard-frame:hover {
+    width: min(85vw, 60vh * 1.2);
+  }
 }
 
 .storyboard-frame__img {

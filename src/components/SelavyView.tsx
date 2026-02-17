@@ -69,6 +69,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   const [mounted, setMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
 
   /* Sort chronologically for narrative flow */
   const sorted = [...photos].sort((a, b) => {
@@ -84,6 +85,16 @@ export default function SelavyView({ photos }: SelavyViewProps) {
       document.body.style.overflow = "";
     };
   }, []);
+
+  /* Close fullscreen on Escape */
+  useEffect(() => {
+    if (fullscreenIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFullscreenIndex(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [fullscreenIndex]);
 
   /* Track which frame is centered */
   useEffect(() => {
@@ -125,7 +136,11 @@ export default function SelavyView({ photos }: SelavyViewProps) {
       {/* Horizontal strip */}
       <div ref={scrollRef} className="storyboard-strip">
         {sorted.map((photo, i) => (
-          <article key={photo.image} className="storyboard-frame">
+          <article
+            key={photo.image}
+            className="storyboard-frame"
+            onClick={() => setFullscreenIndex(i)}
+          >
             <div className="storyboard-frame__img">
               <Image
                 src={photo.image}
@@ -168,6 +183,25 @@ export default function SelavyView({ photos }: SelavyViewProps) {
           {activeIndex + 1} / {sorted.length}
         </span>
       </div>
+
+      {/* Fullscreen overlay */}
+      {fullscreenIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-pointer"
+          onClick={() => setFullscreenIndex(null)}
+        >
+          <Image
+            src={sorted[fullscreenIndex].image}
+            alt="Street photograph"
+            fill
+            className="object-contain p-4 sm:p-8"
+            sizes="100vw"
+          />
+          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.15em] text-[#555] font-mono">
+            {SLUGLINES[fullscreenIndex % SLUGLINES.length]}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
