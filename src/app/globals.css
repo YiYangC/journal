@@ -444,42 +444,96 @@ a:hover {
   text-align: center;
 }
 
-/* ---- Selavy shutter transition ---- */
-.selavy-frame {
-  animation: shutterIn 0.35s ease-out both;
+/* ---- Selavy: Cinematic Storyboard ---- */
+
+.storyboard {
+  background: #0a0a0a;
 }
 
-@keyframes shutterIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.storyboard-strip {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  gap: 2px;
+  padding: 0 max(1rem, calc((100vw - 60vh * 0.67) / 2));
 }
 
-.selavy-shutter {
-  position: absolute;
-  inset: 0;
-  background: #000;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0;
+.storyboard-strip::-webkit-scrollbar {
+  display: none;
 }
 
-.selavy-shutter--active {
-  animation: shutterFlash 0.35s ease-in-out both;
+/* Each frame: fixed-height card */
+.storyboard-frame {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: center;
+  height: calc(100% - 2rem);
+  width: min(85vw, 60vh * 0.67);
 }
 
-@keyframes shutterFlash {
-  0% {
-    opacity: 0;
+.storyboard-frame__img {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border: 1px solid #222;
+}
+
+/* Caption block below each frame */
+.storyboard-frame__caption {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 0 0;
+}
+
+.storyboard-frame__slugline {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.storyboard-frame__scene {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #666;
+  max-width: 28ch;
+}
+
+/* End spacer */
+.storyboard-spacer {
+  flex: none;
+  width: max(1rem, calc((100vw - 60vh * 0.67) / 2));
+}
+
+/* Bottom bar inherits dark bg */
+.storyboard .text-\[var\(--color-alt\)\] {
+  color: #555;
+}
+
+/* ---- Mobile: tighter frame ---- */
+@media (max-width: 640px) {
+  .storyboard-strip {
+    padding: 0 8vw;
+    gap: 1px;
   }
-  40% {
-    opacity: 1;
+
+  .storyboard-frame {
+    width: 85vw;
   }
-  100% {
-    opacity: 0;
+
+  .storyboard-frame__scene {
+    font-size: 0.75rem;
   }
 }
 
