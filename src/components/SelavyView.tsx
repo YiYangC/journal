@@ -70,6 +70,15 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
+  const [closing, setClosing] = useState(false);
+
+  const closeFullscreen = () => {
+    setClosing(true);
+    setTimeout(() => {
+      setFullscreenIndex(null);
+      setClosing(false);
+    }, 300);
+  };
 
   /* Sort chronologically for narrative flow */
   const sorted = [...photos].sort((a, b) => {
@@ -90,7 +99,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   useEffect(() => {
     if (fullscreenIndex === null) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setFullscreenIndex(null);
+      if (e.key === "Escape") closeFullscreen();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -187,17 +196,19 @@ export default function SelavyView({ photos }: SelavyViewProps) {
       {/* Fullscreen overlay */}
       {fullscreenIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-pointer"
-          onClick={() => setFullscreenIndex(null)}
+          className={`storyboard-lightbox fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-pointer ${closing ? "storyboard-lightbox--closing" : ""}`}
+          onClick={closeFullscreen}
         >
-          <Image
-            src={sorted[fullscreenIndex].image}
-            alt="Street photograph"
-            fill
-            className="object-contain p-4 sm:p-8"
-            sizes="100vw"
-          />
-          <span className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.15em] text-[#555] font-mono">
+          <div className={`storyboard-lightbox__img ${closing ? "storyboard-lightbox__img--closing" : ""}`}>
+            <Image
+              src={sorted[fullscreenIndex].image}
+              alt="Street photograph"
+              fill
+              className="object-contain p-4 sm:p-8"
+              sizes="100vw"
+            />
+          </div>
+          <span className={`storyboard-lightbox__caption absolute bottom-4 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.15em] text-[#555] font-mono ${closing ? "storyboard-lightbox__caption--closing" : ""}`}>
             {SLUGLINES[fullscreenIndex % SLUGLINES.length]}
           </span>
         </div>
