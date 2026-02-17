@@ -130,8 +130,8 @@ export default function SelavyView({ photos }: SelavyViewProps) {
           src={photo.image}
           alt="Street photograph"
           fill
-          className="object-contain"
-          sizes="100vw"
+          className="object-cover"
+          sizes="(max-height: 800px) 92vw, 80vh"
           priority={isTop}
         />
       </div>,
@@ -139,11 +139,11 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   }
 
   return (
-    <div className="h-[calc(100dvh-49px)] flex flex-col items-center px-3 sm:px-4 pt-2 pb-2">
-      {/* stack area */}
+    <div className="h-[calc(100dvh-49px)] flex flex-col items-center justify-center px-3 sm:px-4 pt-2 pb-2">
+      {/* stack area — fixed 3:2 card centred in the viewport */}
       <div
         onClick={handleClick}
-        className="relative w-full flex-1 min-h-0 cursor-pointer"
+        className="photo-stack-frame relative cursor-pointer"
       >
         {mounted && cards}
       </div>
