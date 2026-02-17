@@ -63,7 +63,7 @@ export default async function ArchivePage(props: {
     const articles = getArticlesByCategory(segment);
     return (
       <>
-        <section className="p-[3rem] min-h-[40vh] flex flex-col justify-end">
+        <section className="p-4 md:p-[3rem] min-h-[30vh] md:min-h-[40vh] flex flex-col justify-end">
           <h1 className="text-[clamp(1.5rem,4vw,2.5rem)] font-serif italic font-light leading-tight">
             {segment}
           </h1>
@@ -72,7 +72,7 @@ export default async function ArchivePage(props: {
           </p>
         </section>
 
-        <section className="p-[3rem]">
+        <section className="p-4 md:p-[3rem]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (
               <ArticleCard key={article.slug} article={article} />
@@ -92,7 +92,7 @@ export default async function ArchivePage(props: {
 
   return (
     <article>
-      <div className="w-full aspect-[21/9] relative overflow-hidden">
+      <div className="w-full aspect-[4/3] md:aspect-[21/9] relative overflow-hidden">
         <Image
           src={article.coverImage}
           alt={article.title}
@@ -103,7 +103,7 @@ export default async function ArchivePage(props: {
         />
       </div>
 
-      <header className="p-[3rem] max-w-3xl mx-auto">
+      <header className="px-4 py-6 md:p-[3rem] max-w-3xl mx-auto">
         <div className="flex items-center gap-3 mb-4 mt-8 flex-wrap">
           <span className="text-xs uppercase tracking-widest text-[var(--color-alt)]">
             {article.category}
@@ -134,13 +134,13 @@ export default async function ArchivePage(props: {
         </div>
       </header>
 
-      <div className="p-[3rem] max-w-3xl mx-auto">
+      <div className="px-4 pb-6 md:p-[3rem] max-w-3xl mx-auto">
         <div className="prose prose-lg max-w-none">{content}</div>
       </div>
 
       {article.gallery && article.gallery.length > 0 && (
         <section className="mt-16">
-          <div className="px-[3rem] mb-6">
+          <div className="px-4 md:px-[3rem] mb-6">
             <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)]">
               <span className="mr-2">&mdash;</span>gallery
             </p>

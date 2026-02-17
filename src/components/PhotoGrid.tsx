@@ -13,7 +13,7 @@ export default function PhotoGrid({ images, columns = 3 }: PhotoGridProps) {
   }[columns];
 
   return (
-    <div className={`${colClass} gap-4 p-[3rem]`}>
+    <div className={`${colClass} gap-4 p-4 md:p-[3rem]`}>
       {images.map((src, i) => (
         <div key={i} className="mb-4 break-inside-avoid overflow-hidden group">
           <Image

@@ -31,7 +31,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="px-[3rem] py-4 border-t border-[var(--color-border)]">
+    <footer className="px-4 md:px-[3rem] py-4 border-t border-[var(--color-border)]">
       <div className="flex justify-between items-center">
         <p className="text-sm text-[var(--color-alt)]">
           Yi Yang {new Date().getFullYear()}

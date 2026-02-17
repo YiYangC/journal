@@ -39,8 +39,8 @@ export default function MagazineGrid({ articles }: MagazineGridProps) {
         ))}
       </div>
 
-      {/* Right column — black panel with expandable list (hidden on mobile) */}
-      <div className="magazine-col--featured hidden md:flex flex-col">
+      {/* Right column — expandable article list */}
+      <div className="magazine-col--featured flex flex-col">
         <MagazineFeaturedCard article={sorted[0]} articles={sorted} />
       </div>
     </div>

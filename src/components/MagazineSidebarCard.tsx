@@ -24,11 +24,11 @@ export default function MagazineSidebarCard({
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
         />
       </div>
-      <div className="hidden md:block p-4 md:p-5">
-        <h2 className="magazine-card__title text-sm md:text-base">
+      <div className="p-3 md:p-5">
+        <h2 className="magazine-card__title text-xs md:text-base">
           {article.title}
         </h2>
-        <p className="magazine-card__description text-sm mt-2 text-[var(--color-alt)]">
+        <p className="magazine-card__description text-xs md:text-sm mt-1 md:mt-2 text-[var(--color-alt)] line-clamp-2 md:line-clamp-none">
           {article.excerpt}
         </p>
       </div>
