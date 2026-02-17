@@ -305,7 +305,7 @@
     "name": "Neues Museum",
     "address": "Bodestraße 1-3, 10178 Berlin, Germany",
     "coordinates": [52.5206, 13.3969],
-    "visited": false
+    "visited": true
   },
   {
     "name": "James-Simon-Galerie",
@@ -565,6 +565,18 @@
     "name": "MFAH Kinder Building (Steven Holl)",
     "address": "1001 Bissonnet St, Houston, TX 77005, USA",
     "coordinates": [29.7237, -95.3871],
+    "visited": true
+  },
+  {
+    "name": "He Art Museum (Tadao Ando)",
+    "address": "6 Yixing Road, Beijiao, Shunde District, Foshan, China",
+    "coordinates": [22.9357, 113.2147],
+    "visited": true
+  },
+  {
+    "name": "Vaillancourt Fountain",
+    "address": "Embarcadero Plaza, San Francisco, CA 94105, USA",
+    "coordinates": [37.7946, -122.3935],
     "visited": true
   }
 ]
