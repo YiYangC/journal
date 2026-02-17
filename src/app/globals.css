@@ -530,57 +530,6 @@ a:hover {
   width: max(1rem, calc((100vw - 60vh * 0.67) / 2));
 }
 
-/* ---- Lightbox (fullscreen) ---- */
-.storyboard-lightbox {
-  animation: lightbox-bg-in 0.3s ease both;
-}
-.storyboard-lightbox--closing {
-  animation: lightbox-bg-out 0.3s ease both;
-}
-
-.storyboard-lightbox__img {
-  position: absolute;
-  inset: 0;
-  animation: lightbox-img-in 0.4s cubic-bezier(0.2, 1, 0.7, 1) both;
-}
-.storyboard-lightbox__img--closing {
-  animation: lightbox-img-out 0.3s ease both;
-}
-
-.storyboard-lightbox__caption {
-  animation: lightbox-caption-in 0.4s ease 0.15s both;
-}
-.storyboard-lightbox__caption--closing {
-  animation: lightbox-caption-out 0.2s ease both;
-}
-
-@keyframes lightbox-bg-in {
-  from { background-color: rgb(0 0 0 / 0); }
-  to   { background-color: rgb(0 0 0 / 0.95); }
-}
-@keyframes lightbox-bg-out {
-  from { background-color: rgb(0 0 0 / 0.95); }
-  to   { background-color: rgb(0 0 0 / 0); }
-}
-
-@keyframes lightbox-img-in {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
-}
-@keyframes lightbox-img-out {
-  from { opacity: 1; transform: scale(1); }
-  to   { opacity: 0; transform: scale(0.9); }
-}
-
-@keyframes lightbox-caption-in {
-  from { opacity: 0; transform: translate(-50%, 0.5rem); }
-  to   { opacity: 1; transform: translate(-50%, 0); }
-}
-@keyframes lightbox-caption-out {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
 /* Bottom bar inherits dark bg */
 .storyboard .text-\[var\(--color-alt\)\] {
   color: #555;

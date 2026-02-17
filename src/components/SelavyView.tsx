@@ -69,15 +69,33 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   const [mounted, setMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [fullscreenIndex, setFullscreenIndex] = useState<number | null>(null);
-  const [closing, setClosing] = useState(false);
+  const [lightbox, setLightbox] = useState<{
+    index: number;
+    rect: DOMRect;
+    phase: "entering" | "open" | "exiting";
+  } | null>(null);
 
-  const closeFullscreen = () => {
-    setClosing(true);
-    setTimeout(() => {
-      setFullscreenIndex(null);
-      setClosing(false);
-    }, 300);
+  const openLightbox = (i: number, e: React.MouseEvent) => {
+    const imgEl = (e.currentTarget as HTMLElement).querySelector(
+      ".storyboard-frame__img",
+    );
+    if (!imgEl) return;
+    setLightbox({
+      index: i,
+      rect: imgEl.getBoundingClientRect(),
+      phase: "entering",
+    });
+  };
+
+  const closeLightbox = () => {
+    if (!lightbox) return;
+    // Re-read the source frame rect (may have scrolled)
+    const frames =
+      scrollRef.current?.querySelectorAll<HTMLElement>(".storyboard-frame__img");
+    const rect =
+      frames?.[lightbox.index]?.getBoundingClientRect() ?? lightbox.rect;
+    setLightbox({ ...lightbox, rect, phase: "exiting" });
+    setTimeout(() => setLightbox(null), 400);
   };
 
   /* Sort chronologically for narrative flow */
@@ -95,15 +113,26 @@ export default function SelavyView({ photos }: SelavyViewProps) {
     };
   }, []);
 
+  /* Transition entering → open after initial paint */
+  useEffect(() => {
+    if (lightbox?.phase !== "entering") return;
+    let id = requestAnimationFrame(() => {
+      id = requestAnimationFrame(() => {
+        setLightbox((prev) => (prev ? { ...prev, phase: "open" } : null));
+      });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [lightbox?.phase]);
+
   /* Close fullscreen on Escape */
   useEffect(() => {
-    if (fullscreenIndex === null) return;
+    if (!lightbox) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeFullscreen();
+      if (e.key === "Escape") closeLightbox();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [fullscreenIndex]);
+  }, [lightbox]);
 
   /* Track which frame is centered */
   useEffect(() => {
@@ -148,7 +177,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
           <article
             key={photo.image}
             className="storyboard-frame"
-            onClick={() => setFullscreenIndex(i)}
+            onClick={(e) => openLightbox(i, e)}
           >
             <div className="storyboard-frame__img">
               <Image
@@ -193,26 +222,62 @@ export default function SelavyView({ photos }: SelavyViewProps) {
         </span>
       </div>
 
-      {/* Fullscreen overlay */}
-      {fullscreenIndex !== null && (
-        <div
-          className={`storyboard-lightbox fixed inset-0 z-50 bg-black/95 flex items-center justify-center cursor-pointer ${closing ? "storyboard-lightbox--closing" : ""}`}
-          onClick={closeFullscreen}
-        >
-          <div className={`storyboard-lightbox__img ${closing ? "storyboard-lightbox__img--closing" : ""}`}>
-            <Image
-              src={sorted[fullscreenIndex].image}
-              alt="Street photograph"
-              fill
-              className="object-contain p-4 sm:p-8"
-              sizes="100vw"
-            />
+      {/* Fullscreen lightbox — FLIP animation from source frame */}
+      {lightbox && (() => {
+        const { rect: r, phase, index } = lightbox;
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const collapsed = phase !== "open";
+
+        // Uniform scale so the fullscreen container maps to the source rect
+        const scale = Math.min(r.width / vw, r.height / vh);
+        const tx = r.left + r.width / 2 - vw / 2;
+        const ty = r.top + r.height / 2 - vh / 2;
+
+        return (
+          <div
+            className="fixed inset-0 z-50 cursor-pointer"
+            onClick={closeLightbox}
+            style={{
+              backgroundColor: collapsed
+                ? "rgba(0,0,0,0)"
+                : "rgba(0,0,0,0.95)",
+              transition: "background-color 0.4s ease",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                transform: collapsed
+                  ? `translate3d(${tx}px,${ty}px,0) scale(${scale})`
+                  : "translate3d(0,0,0) scale(1)",
+                transition:
+                  phase === "entering"
+                    ? "none"
+                    : "transform 0.4s cubic-bezier(0.2,1,0.7,1)",
+              }}
+            >
+              <Image
+                src={sorted[index].image}
+                alt="Street photograph"
+                fill
+                className="object-contain p-4 sm:p-8"
+                sizes="100vw"
+              />
+            </div>
+            <span
+              className="absolute bottom-4 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.15em] text-[#555] font-mono"
+              style={{
+                opacity: phase === "open" ? 1 : 0,
+                transition: "opacity 0.3s ease",
+              }}
+            >
+              {SLUGLINES[index % SLUGLINES.length]}
+            </span>
           </div>
-          <span className={`storyboard-lightbox__caption absolute bottom-4 left-1/2 -translate-x-1/2 text-xs uppercase tracking-[0.15em] text-[#555] font-mono ${closing ? "storyboard-lightbox__caption--closing" : ""}`}>
-            {SLUGLINES[fullscreenIndex % SLUGLINES.length]}
-          </span>
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
