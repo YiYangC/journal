@@ -90,7 +90,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   }
 
   return (
-    <div className="h-[calc(100dvh-49px)] flex flex-col items-center px-3 sm:px-4 pt-2 pb-2">
+    <div className="h-[calc(100dvh-49px)] flex flex-col items-center px-0 pt-0 pb-2">
       {current && (
         <button
           onClick={handleClick}
@@ -104,7 +104,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
               src={current.image}
               alt="Street photograph"
               fill
-              className="object-contain"
+              className="object-cover"
               sizes="100vw"
               priority
             />
@@ -117,7 +117,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
         </button>
       )}
 
-      <div className="flex items-center justify-between w-full shrink-0 py-3">
+      <div className="flex items-center justify-between w-full shrink-0 px-3 sm:px-4 py-3">
         <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
           {current?.date
             ? new Date(current.date + "T00:00:00").toLocaleDateString("en-US", {
@@ -127,7 +127,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
             : "\u00A0"}
         </span>
         <span className="text-sm leading-normal text-[var(--color-alt)]">
-          {index + 1} / {photos.length}
+          {index + 1} / {order.length}
         </span>
       </div>
     </div>
