@@ -165,7 +165,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
             : "\u00A0"}
         </span>
         <span className="text-sm leading-normal text-[var(--color-alt)]">
-          {activeIndex + 1} / {photos.length}
+          {activeIndex + 1} / {sorted.length}
         </span>
       </div>
     </div>
