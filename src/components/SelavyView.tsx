@@ -108,7 +108,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
 
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
-  }, [sorted.length]);
+  }, [sorted.length, mounted]);
 
   if (!mounted || photos.length === 0) {
     return (

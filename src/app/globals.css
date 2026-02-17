@@ -493,6 +493,8 @@ a:hover {
   gap: 0.25rem;
   padding: 0.5rem 0 0;
   flex-shrink: 0;
+  height: 4rem;
+  overflow: hidden;
 }
 
 .storyboard-frame__slugline {
