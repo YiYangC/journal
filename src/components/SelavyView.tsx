@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { SelavyPhoto } from "@/lib/types";
 
@@ -8,127 +8,196 @@ interface SelavyViewProps {
   photos: SelavyPhoto[];
 }
 
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
 export default function SelavyView({ photos }: SelavyViewProps) {
-  const [order, setOrder] = useState(photos);
-  const [index, setIndex] = useState(0);
   const [mounted, setMounted] = useState(false);
-  const [animKey, setAnimKey] = useState(0);
-  const [shutterActive, setShutterActive] = useState(false);
-  const transitioning = useRef(false);
+  const [index, setIndex] = useState(0);
+  const [scrubbing, setScrubbing] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prevIndex = useRef(0);
+  const velocity = useRef(0);
+
+  /* Sort chronologically so the scrub timeline is linear */
+  const sorted = [...photos].sort((a, b) => {
+    const da = a.date || "9999";
+    const db = b.date || "9999";
+    return da.localeCompare(db);
+  });
+
+  const n = sorted.length;
 
   useEffect(() => {
-    setOrder(shuffle(photos));
     setMounted(true);
-
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [photos]);
+  }, []);
 
-  const current = order[index] ?? null;
-
-  const goTo = useCallback(
-    (next: number) => {
-      if (transitioning.current) return;
-      transitioning.current = true;
-      setShutterActive(true);
-
-      setTimeout(() => {
-        setAnimKey((k) => k + 1);
-        setIndex(next);
-      }, 140);
-
-      setTimeout(() => {
-        setShutterActive(false);
-        transitioning.current = false;
-      }, 350);
+  /* Map a horizontal position (0–1 ratio) to an image index */
+  const xToIndex = useCallback(
+    (ratio: number) => {
+      return Math.min(Math.max(Math.floor(ratio * n), 0), n - 1);
     },
-    [],
+    [n],
   );
 
-  const handleClick = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const isLeft = x < rect.width / 2;
+  /* Desktop: mousemove scrubbing */
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      const el = containerRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const ratio = (e.clientX - rect.left) / rect.width;
+      const next = xToIndex(ratio);
 
-      if (isLeft) {
-        // Go back — wrap to end
-        const next = index <= 0 ? order.length - 1 : index - 1;
-        goTo(next);
-      } else {
-        // Go forward — reshuffle at end
-        if (index >= order.length - 1) {
-          setOrder(shuffle(photos));
-          goTo(0);
-        } else {
-          goTo(index + 1);
-        }
-      }
+      velocity.current = Math.abs(next - prevIndex.current);
+      prevIndex.current = next;
+      setIndex(next);
+      setScrubbing(true);
     },
-    [index, order.length, photos, goTo],
+    [xToIndex],
   );
 
-  if (photos.length === 0) {
+  const handleMouseLeave = useCallback(() => {
+    setScrubbing(false);
+    velocity.current = 0;
+  }, []);
+
+  /* Mobile: touch drag scrubbing */
+  const touchStart = useRef<number | null>(null);
+  const touchBaseIndex = useRef(0);
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent) => {
+      touchStart.current = e.touches[0].clientX;
+      touchBaseIndex.current = index;
+      setScrubbing(true);
+    },
+    [index],
+  );
+
+  const handleTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (touchStart.current === null) return;
+      const el = containerRef.current;
+      if (!el) return;
+
+      const dx = e.touches[0].clientX - touchStart.current;
+      const width = el.getBoundingClientRect().width;
+      /* Full drag across screen width = all frames */
+      const framesDelta = Math.round((dx / width) * n);
+      const next = Math.min(
+        Math.max(touchBaseIndex.current + framesDelta, 0),
+        n - 1,
+      );
+
+      velocity.current = Math.abs(next - prevIndex.current);
+      prevIndex.current = next;
+      setIndex(next);
+    },
+    [n],
+  );
+
+  const handleTouchEnd = useCallback(() => {
+    touchStart.current = null;
+    setScrubbing(false);
+    velocity.current = 0;
+  }, []);
+
+  if (!mounted || photos.length === 0) {
     return (
       <div className="flex items-center justify-center h-[calc(100dvh-49px)]">
         <p className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
-          No photographs yet
+          {photos.length === 0 ? "No photographs yet" : "\u00A0"}
         </p>
       </div>
     );
   }
 
+  const current = sorted[index];
+  const progress = n > 1 ? index / (n - 1) : 0;
+
   return (
-    <div className="h-[calc(100dvh-49px)] flex flex-col items-center px-3 sm:px-4 pt-2 pb-2">
-      {current && (
-        <button
-          onClick={handleClick}
-          className="relative w-full flex-1 min-h-0 cursor-pointer overflow-hidden"
-        >
-          <div
-            key={animKey}
-            className="selavy-frame w-full h-full relative"
-          >
+    <div className="scrubber h-[calc(100dvh-49px)] flex flex-col">
+      {/* Main scrub area */}
+      <div
+        ref={containerRef}
+        className="scrubber-stage"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Preload all images (hidden) so scrubbing is instant */}
+        <div className="scrubber-preload">
+          {sorted.map((photo, i) => (
             <Image
-              src={current.image}
-              alt="Street photograph"
+              key={photo.image}
+              src={photo.image}
+              alt=""
               fill
               className="object-contain"
               sizes="100vw"
-              priority
+              priority={i < 5}
             />
-          </div>
+          ))}
+        </div>
 
-          {/* Black shutter overlay */}
-          <div
-            className={`selavy-shutter ${shutterActive ? "selavy-shutter--active" : ""}`}
+        {/* Active image */}
+        <div className="scrubber-image">
+          <Image
+            key={current.image}
+            src={current.image}
+            alt="Street photograph"
+            fill
+            className="object-contain"
+            sizes="100vw"
+            priority
           />
-        </button>
-      )}
+        </div>
 
-      <div className="flex items-center justify-between w-full shrink-0 py-3">
-        <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
-          {current?.date
-            ? new Date(current.date + "T00:00:00").toLocaleDateString("en-US", {
-                month: "short",
-                year: "numeric",
-              })
-            : "\u00A0"}
-        </span>
-        <span className="text-sm leading-normal text-[var(--color-alt)]">
-          {index + 1} / {photos.length}
-        </span>
+        {/* Motion blur overlay */}
+        <div
+          className="scrubber-blur"
+          style={{ opacity: scrubbing && velocity.current > 2 ? 0.4 : 0 }}
+        />
+
+        {/* Hint text (fades out once user starts scrubbing) */}
+        <div
+          className="scrubber-hint"
+          style={{ opacity: scrubbing ? 0 : 0.4 }}
+        >
+          <span>drag to scrub through time</span>
+        </div>
+      </div>
+
+      {/* Timeline bar */}
+      <div className="scrubber-footer">
+        <div className="scrubber-timeline">
+          <div
+            className="scrubber-timeline__fill"
+            style={{ width: `${progress * 100}%` }}
+          />
+          <div
+            className="scrubber-timeline__head"
+            style={{ left: `${progress * 100}%` }}
+          />
+        </div>
+
+        <div className="scrubber-meta">
+          <span className="scrubber-meta__date">
+            {current?.date
+              ? new Date(current.date + "T00:00:00").toLocaleDateString(
+                  "en-US",
+                  { month: "short", year: "numeric" },
+                )
+              : "\u00A0"}
+          </span>
+          <span className="scrubber-meta__count">
+            {index + 1} / {n}
+          </span>
+        </div>
       </div>
     </div>
   );

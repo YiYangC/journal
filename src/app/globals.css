@@ -444,42 +444,135 @@ a:hover {
   text-align: center;
 }
 
-/* ---- Selavy shutter transition ---- */
-.selavy-frame {
-  animation: shutterIn 0.35s ease-out both;
+/* ---- Selavy: Temporal Scrubber ---- */
+
+.scrubber {
+  background: #000;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
-@keyframes shutterIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
+.scrubber-stage {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  cursor: ew-resize;
+  overflow: hidden;
+  touch-action: none;
 }
 
-.selavy-shutter {
+/* Hidden preload container */
+.scrubber-preload {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Active image */
+.scrubber-image {
+  position: absolute;
+  inset: 2rem;
+}
+
+/* Motion blur overlay for fast scrubbing */
+.scrubber-blur {
   position: absolute;
   inset: 0;
   background: #000;
-  z-index: 2;
   pointer-events: none;
-  opacity: 0;
+  transition: opacity 0.15s ease;
 }
 
-.selavy-shutter--active {
-  animation: shutterFlash 0.35s ease-in-out both;
+/* Hint text */
+.scrubber-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
-@keyframes shutterFlash {
-  0% {
-    opacity: 0;
+.scrubber-hint span {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #666;
+  white-space: nowrap;
+}
+
+/* Footer with timeline */
+.scrubber-footer {
+  flex: none;
+  padding: 0.75rem 1.5rem 1rem;
+}
+
+/* Timeline scrub bar */
+.scrubber-timeline {
+  position: relative;
+  height: 2px;
+  background: #222;
+  margin-bottom: 0.75rem;
+}
+
+.scrubber-timeline__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #555;
+  transition: width 0.05s linear;
+}
+
+.scrubber-timeline__head {
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: #999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.05s linear;
+}
+
+/* Meta row */
+.scrubber-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scrubber-meta__date {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #666;
+}
+
+.scrubber-meta__count {
+  font-size: 0.75rem;
+  color: #555;
+}
+
+/* Mobile: slightly smaller inset */
+@media (max-width: 640px) {
+  .scrubber-image {
+    inset: 1rem;
   }
-  40% {
-    opacity: 1;
+
+  .scrubber-hint {
+    bottom: 1rem;
   }
-  100% {
-    opacity: 0;
+
+  .scrubber-hint span {
+    font-size: 0.55rem;
+  }
+
+  .scrubber-footer {
+    padding: 0.5rem 1rem 0.75rem;
   }
 }
 
