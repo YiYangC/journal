@@ -33,6 +33,11 @@ const nextConfig: NextConfig = {
         destination: "/archive/:tag",
         permanent: true,
       },
+      {
+        source: "/studies",
+        destination: "/artifacts",
+        permanent: true,
+      },
     ];
   },
 };

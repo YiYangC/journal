@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const links = [
   { href: "/archive", label: "Archive" },
-  { href: "/studies", label: "Studies" },
+  { href: "/artifacts", label: "Artifacts" },
   { href: "/selavy", label: "Selavy" },
   { href: "/map", label: "Map" },
   { href: "/about", label: "About" },
@@ -23,7 +23,7 @@ export default function Footer() {
   if (
     pathname === "/selavy" ||
     pathname === "/projects/concrete-memories" ||
-    pathname === "/studies" ||
+    pathname === "/artifacts" ||
     pathname === "/writings" ||
     pathname === "/map"
   ) {

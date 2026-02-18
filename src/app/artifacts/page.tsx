@@ -2,7 +2,7 @@ import WritingsMenu from "@/components/WritingsMenu";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Studies | Yi Yang",
+  title: "Artifacts | Yi Yang",
   description:
     "Selected projects and essays on architecture, technology, media, and design.",
 };
