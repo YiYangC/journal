@@ -464,6 +464,10 @@ a:hover {
   padding: 0 max(1rem, calc((100vw - 60vh * 0.67) / 2));
 }
 
+.storyboard-strip.snapping-disabled {
+  scroll-snap-type: none;
+}
+
 .storyboard-strip::-webkit-scrollbar {
   display: none;
 }
@@ -483,9 +487,6 @@ a:hover {
 @media (min-width: 641px) {
   .storyboard-frame {
     transition: width 0.5s cubic-bezier(0.2, 1, 0.7, 1);
-  }
-  .storyboard-frame:hover {
-    width: min(85vw, 60vh * 1.2);
   }
   .storyboard-frame:hover .storyboard-frame__img {
     border-color: #444;

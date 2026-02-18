@@ -69,33 +69,24 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   const [mounted, setMounted] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const hoverTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [aspectRatios, setAspectRatios] = useState<Map<number, number>>(
+    new Map(),
+  );
   const [lightbox, setLightbox] = useState<{
     index: number;
-    rect: DOMRect;
     phase: "entering" | "open" | "exiting";
   } | null>(null);
 
-  const openLightbox = (i: number, e: React.MouseEvent) => {
-    const imgEl = (e.currentTarget as HTMLElement).querySelector(
-      ".storyboard-frame__img",
-    );
-    if (!imgEl) return;
-    setLightbox({
-      index: i,
-      rect: imgEl.getBoundingClientRect(),
-      phase: "entering",
-    });
+  const openLightbox = (i: number) => {
+    setLightbox({ index: i, phase: "entering" });
   };
 
   const closeLightbox = () => {
     if (!lightbox) return;
-    // Re-read the source frame rect (may have scrolled)
-    const frames =
-      scrollRef.current?.querySelectorAll<HTMLElement>(".storyboard-frame__img");
-    const rect =
-      frames?.[lightbox.index]?.getBoundingClientRect() ?? lightbox.rect;
-    setLightbox({ ...lightbox, rect, phase: "exiting" });
-    setTimeout(() => setLightbox(null), 400);
+    setLightbox({ ...lightbox, phase: "exiting" });
+    setTimeout(() => setLightbox(null), 300);
   };
 
   /* Sort chronologically for narrative flow */
@@ -104,6 +95,62 @@ export default function SelavyView({ photos }: SelavyViewProps) {
     const db = b.date || "9999";
     return da.localeCompare(db);
   });
+
+  /* Store aspect ratio when images load */
+  const handleImageLoad =
+    (index: number) => (e: React.SyntheticEvent<HTMLImageElement>) => {
+      const img = e.currentTarget;
+      const ratio = img.naturalWidth / img.naturalHeight;
+      setAspectRatios((prev) => new Map(prev).set(index, ratio));
+    };
+
+  /* Compute inline width for each frame so total strip width stays constant.
+     When a frame is hovered it expands; its immediate neighbours compact by
+     the same total amount.  For portrait images the expansion is capped so
+     the frame never gets wider than the image's natural fill width. */
+  const getFrameStyle = (
+    index: number,
+  ): React.CSSProperties | undefined => {
+    if (hoveredIndex === null) return undefined;
+    if (window.innerWidth <= 640) return undefined; // no hover on mobile
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const baseW = Math.min(0.85 * vw, 0.6 * vh * 0.67);
+    let expandedW = Math.min(0.85 * vw, 0.6 * vh * 1.2);
+
+    // For portrait images, cap expansion so the image fills without zooming
+    const ratio = aspectRatios.get(hoveredIndex);
+    if (ratio !== undefined && ratio < 1) {
+      const imgContainer = scrollRef.current?.querySelector(
+        ".storyboard-frame__img",
+      );
+      if (imgContainer) {
+        const maxW = imgContainer.clientHeight * ratio;
+        expandedW = Math.min(expandedW, Math.max(baseW, maxW));
+      }
+    }
+
+    let delta = expandedW - baseW;
+    if (delta <= 0) return undefined; // no expansion needed
+
+    const hasLeft = hoveredIndex > 0;
+    const hasRight = hoveredIndex < sorted.length - 1;
+    const neighborCount = (hasLeft ? 1 : 0) + (hasRight ? 1 : 0);
+    if (neighborCount === 0) return undefined;
+
+    // Cap so no neighbour shrinks below 50 % of base width
+    const maxDelta = baseW * 0.5 * neighborCount;
+    delta = Math.min(delta, maxDelta);
+    const shrink = delta / neighborCount;
+
+    if (index === hoveredIndex) return { width: baseW + delta };
+    if (hasLeft && index === hoveredIndex - 1)
+      return { width: baseW - shrink };
+    if (hasRight && index === hoveredIndex + 1)
+      return { width: baseW - shrink };
+    return { width: baseW };
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -161,7 +208,7 @@ export default function SelavyView({ photos }: SelavyViewProps) {
 
   if (!mounted || photos.length === 0) {
     return (
-      <div className="flex items-center justify-center h-[calc(100dvh-49px)]">
+      <div className="flex items-center justify-center h-[calc(100dvh-49px)] md:h-[calc(100dvh-65px)]">
         <p className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
           {photos.length === 0 ? "No photographs yet" : "\u00A0"}
         </p>
@@ -170,14 +217,24 @@ export default function SelavyView({ photos }: SelavyViewProps) {
   }
 
   return (
-    <div className="storyboard h-[calc(100dvh-49px)] flex flex-col">
+    <div className="storyboard h-[calc(100dvh-49px)] md:h-[calc(100dvh-65px)] flex flex-col">
       {/* Horizontal strip */}
-      <div ref={scrollRef} className="storyboard-strip">
+      <div ref={scrollRef} className={`storyboard-strip${hoveredIndex !== null ? " snapping-disabled" : ""}`}>
         {sorted.map((photo, i) => (
           <article
             key={photo.image}
             className="storyboard-frame"
-            onClick={(e) => openLightbox(i, e)}
+            style={getFrameStyle(i)}
+            onMouseEnter={() => {
+              if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+              hoverTimerRef.current = setTimeout(() => setHoveredIndex(i), 500);
+            }}
+            onMouseLeave={() => {
+              if (hoverTimerRef.current) clearTimeout(hoverTimerRef.current);
+              hoverTimerRef.current = null;
+              setHoveredIndex(null);
+            }}
+            onClick={() => openLightbox(i)}
           >
             <div className="storyboard-frame__img">
               <Image
@@ -185,8 +242,9 @@ export default function SelavyView({ photos }: SelavyViewProps) {
                 alt="Street photograph"
                 fill
                 className="object-cover"
-                sizes="(max-width: 640px) 85vw, 60vh"
+                sizes="(max-width: 640px) 85vw, 50vw"
                 priority={i < 3}
+                onLoad={handleImageLoad(i)}
               />
             </div>
 
@@ -222,40 +280,26 @@ export default function SelavyView({ photos }: SelavyViewProps) {
         </span>
       </div>
 
-      {/* Fullscreen lightbox — FLIP animation from source frame */}
+      {/* Fullscreen lightbox — fade in / fade out */}
       {lightbox && (() => {
-        const { rect: r, phase, index } = lightbox;
-        const vw = window.innerWidth;
-        const vh = window.innerHeight;
-        const collapsed = phase !== "open";
-
-        // Uniform scale so the fullscreen container maps to the source rect
-        const scale = Math.min(r.width / vw, r.height / vh);
-        const tx = r.left + r.width / 2 - vw / 2;
-        const ty = r.top + r.height / 2 - vh / 2;
+        const { phase, index } = lightbox;
+        const visible = phase === "open";
 
         return (
           <div
             className="fixed inset-0 z-50 cursor-pointer"
             onClick={closeLightbox}
             style={{
-              backgroundColor: collapsed
-                ? "rgba(0,0,0,0)"
-                : "rgba(0,0,0,0.95)",
-              transition: "background-color 0.4s ease",
+              backgroundColor: visible ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0)",
+              transition: "background-color 0.3s ease",
             }}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                transform: collapsed
-                  ? `translate3d(${tx}px,${ty}px,0) scale(${scale})`
-                  : "translate3d(0,0,0) scale(1)",
-                transition:
-                  phase === "entering"
-                    ? "none"
-                    : "transform 0.4s cubic-bezier(0.2,1,0.7,1)",
+                opacity: visible ? 1 : 0,
+                transition: "opacity 0.3s ease",
               }}
             >
               <Image
