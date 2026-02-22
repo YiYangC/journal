@@ -98,11 +98,19 @@ export default async function LibraryPage() {
         <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
           {BOOKS.map((book, i) => (
             <div key={`${book.title}-${i}`} className="group">
-              <img
-                src={book.coverUrl}
-                alt={book.title}
-                className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-              />
+              {book.coverUrl ? (
+                <img
+                  src={book.coverUrl}
+                  alt={book.title}
+                  className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
+              ) : (
+                <div className="w-full aspect-[2/3] bg-[var(--color-surface)] flex items-center justify-center transition-transform duration-300 group-hover:scale-[1.03]">
+                  <span className="text-xs text-[var(--color-alt)] text-center px-2 font-serif italic">
+                    {book.title}
+                  </span>
+                </div>
+              )}
               <p className="mt-1.5 text-xs font-sans truncate group-hover:text-[var(--color-link)] transition-colors">
                 {book.title}
               </p>
