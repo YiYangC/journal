@@ -12,6 +12,7 @@ const LEFT_LINKS = [
 
 const RIGHT_LINKS = [
   { href: "/map", label: "Map" },
+  { href: "/library", label: "Library" },
 ];
 
 export default function Navigation() {
