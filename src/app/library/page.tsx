@@ -25,11 +25,11 @@ export default async function LibraryPage() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <div className="w-full aspect-[2/3] bg-[var(--color-surface)] flex items-center justify-center">
-                  <span className="text-[10px] text-[var(--color-alt)] text-center px-1 leading-tight">
-                    {film.title}
-                  </span>
-                </div>
+                <img
+                  src={film.posterUrl}
+                  alt={film.title}
+                  className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                />
                 <p className="mt-1 text-[10px] text-[var(--color-alt)]">
                   {i + 1}. {film.year}
                 </p>
