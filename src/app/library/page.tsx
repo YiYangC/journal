@@ -31,10 +31,10 @@ export default async function LibraryPage() {
                   <img
                     src={film.posterUrl}
                     alt={film.title}
-                    className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    className="w-full aspect-[2/3] object-cover grayscale transition-all duration-300 group-hover:grayscale-0 group-hover:scale-[1.03]"
                   />
                 ) : (
-                  <div className="w-full aspect-[2/3] bg-[var(--color-surface)] flex items-center justify-center">
+                  <div className="w-full aspect-[2/3] bg-[var(--color-surface)] flex items-center justify-center grayscale transition-all duration-300 group-hover:grayscale-0">
                     <span className="text-xs text-[var(--color-alt)] text-center px-2">
                       {film.title}
                     </span>
