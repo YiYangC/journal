@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import ThemeToggle from "./ThemeToggle";
+
 
 const LEFT_LINKS = [
   { href: "/archive", label: "Archive" },
@@ -12,7 +12,6 @@ const LEFT_LINKS = [
 
 const RIGHT_LINKS = [
   { href: "/map", label: "Map" },
-  { href: "/about", label: "About" },
 ];
 
 export default function Navigation() {
@@ -49,15 +48,15 @@ export default function Navigation() {
         >
           Yi Yang
         </Link>
-        {/* Desktop: Link to Archive */}
+        {/* Desktop: Link to About */}
         <Link
-          href="/archive"
+          href="/about"
           className="hidden md:block text-lg font-bold uppercase tracking-[0.2em] text-center px-6"
         >
           Yi Yang&nbsp;杨 艺
         </Link>
 
-        {/* Right — Utility links + theme toggle (hidden on mobile) */}
+        {/* Right — Utility links (hidden on mobile) */}
         <div className="hidden md:flex items-center justify-end gap-4 md:gap-6">
           {RIGHT_LINKS.map((link) => (
             <Link
@@ -72,7 +71,7 @@ export default function Navigation() {
               {link.label}
             </Link>
           ))}
-          <ThemeToggle />
+
         </div>
       </nav>
     </header>

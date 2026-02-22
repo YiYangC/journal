@@ -3,7 +3,6 @@
 import { useState, useMemo, useCallback, useRef } from "react";
 import Map, { Marker, Popup, NavigationControl } from "react-map-gl/mapbox";
 import type { MapRef } from "react-map-gl/mapbox";
-import { useTheme } from "./ThemeProvider";
 import { Article, Location, SelavyPhoto } from "@/lib/types";
 import Image from "next/image";
 import Link from "next/link";
@@ -22,7 +21,6 @@ interface MapViewProps {
 }
 
 export default function MapView({ articles, locations, selavyPhotos = [] }: MapViewProps) {
-  const { theme } = useTheme();
   const [selected, setSelected] = useState<SelectedPin>(null);
   const [indexOpen, setIndexOpen] = useState(false);
   const mapRef = useRef<MapRef>(null);
@@ -66,10 +64,7 @@ export default function MapView({ articles, locations, selavyPhotos = [] }: MapV
     };
   }, [allCoords]);
 
-  const mapStyle =
-    theme === "dark"
-      ? "mapbox://styles/mapbox/dark-v11"
-      : "mapbox://styles/mapbox/light-v11";
+  const mapStyle = "mapbox://styles/mapbox/dark-v11";
 
   const handleClick = useCallback(
     (pin: NonNullable<SelectedPin>) => {

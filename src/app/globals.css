@@ -17,20 +17,8 @@
   --color-card-bg: var(--color-card-bg-val);
 }
 
-/* ---- Light mode (default) ---- */
-:root {
-  --color-bg-val: #fafafa;
-  --color-text-val: #111;
-  --color-link-val: rgb(90, 90, 90);
-  --color-link-hover-val: #000;
-  --color-alt-val: #6d6d6d;
-  --color-surface-val: #ffffff;
-  --color-border-val: #e5e5e5;
-  --color-card-bg-val: #ffffff;
-}
-
 /* ---- Dark mode (portfolio palette) ---- */
-.dark {
+:root {
   --color-bg-val: #000000;
   --color-text-val: #fff;
   --color-link-val: rgb(165, 164, 164);
