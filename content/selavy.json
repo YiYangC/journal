@@ -220,5 +220,11 @@
     "location": "100 Van Ness Ave, San Francisco",
     "coordinates": [37.7749, -122.4194],
     "date": "2026-02-08"
+  },
+  {
+    "image": "UPLOAD_NEEDED",
+    "location": "Civic Center, San Francisco",
+    "coordinates": [37.7793, -122.4193],
+    "date": "2026-02-22"
   }
 ]
