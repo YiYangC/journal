@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getAllFilms } from "@/lib/letterboxd";
-import { BOOKS } from "@/lib/about-data";
+import { BOOKS, TOP_FILMS } from "@/lib/about-data";
 
 export const metadata: Metadata = {
   title: "Library",
@@ -12,8 +12,35 @@ export default async function LibraryPage() {
 
   return (
     <section className="max-w-5xl mx-auto px-6 py-12 md:py-16">
-      {/* Films */}
+      {/* Top 10 */}
       <div>
+        <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
+          All-Time Top 10
+        </span>
+        <ol className="mt-4 grid grid-cols-5 sm:grid-cols-10 gap-3">
+          {TOP_FILMS.map((film, i) => (
+            <li key={film.letterboxdSlug} className="group">
+              <a
+                href={`https://letterboxd.com/film/${film.letterboxdSlug}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="w-full aspect-[2/3] bg-[var(--color-surface)] flex items-center justify-center">
+                  <span className="text-[10px] text-[var(--color-alt)] text-center px-1 leading-tight">
+                    {film.title}
+                  </span>
+                </div>
+                <p className="mt-1 text-[10px] text-[var(--color-alt)]">
+                  {i + 1}. {film.year}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* Films */}
+      <div className="mt-16">
         <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
           Films · {films.length}
         </span>
