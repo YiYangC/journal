@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import readline from "node:readline";
 import { v2 as cloudinary } from "cloudinary";
 import matter from "gray-matter";
 
@@ -84,6 +85,40 @@ function saveManifest(slug, manifest) {
   fs.writeFileSync(manifestPath(slug), JSON.stringify(manifest, null, 2));
 }
 
+// ── Interactive prompt ──────────────────────────────────────────────
+function ask(question) {
+  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  return new Promise((resolve) => {
+    rl.question(`[watch-inbox] ${question}`, (answer) => {
+      rl.close();
+      resolve(answer.trim());
+    });
+  });
+}
+
+async function promptSelavyMeta(filename) {
+  log(`\n  Metadata for ${filename}:`);
+  const location = await ask("  Location (e.g. 'Paris, France'): ");
+  const coordsRaw = await ask("  Coordinates as lat,lng (e.g. '48.86,2.35') or press Enter to skip: ");
+  const dateRaw = await ask(`  Date as YYYY-MM-DD (press Enter for today ${todayISO()}): `);
+
+  let coordinates = [0, 0];
+  if (coordsRaw) {
+    const parts = coordsRaw.split(",").map((s) => parseFloat(s.trim()));
+    if (parts.length === 2 && parts.every((n) => !isNaN(n))) {
+      coordinates = parts;
+    } else {
+      warn("  Could not parse coordinates — using [0, 0]");
+    }
+  }
+
+  return {
+    location: location || "FILL_IN",
+    coordinates,
+    date: dateRaw || todayISO(),
+  };
+}
+
 // ── Upload ──────────────────────────────────────────────────────────
 async function uploadImage(filepath, assetFolder) {
   const res = await cloudinary.uploader.upload(filepath, {
@@ -148,12 +183,11 @@ async function processSelavy() {
         log(`  ↻ replaced: ${original}`);
       }
     } else {
-      // Addition — append new entry with placeholder values
+      // Addition — prompt for metadata interactively
+      const meta = await promptSelavyMeta(original);
       selavyData.push({
         image: publicId,
-        location: "FILL_IN",
-        coordinates: [0, 0],
-        date: todayISO(),
+        ...meta,
       });
     }
     manifest[original] = publicId;
