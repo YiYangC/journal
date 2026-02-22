@@ -27,4 +27,16 @@ export const BOOKS: Book[] = [
     startedDate: "2026-02-01",
     current: true,
   },
+  {
+    title: "Men Without Women",
+    author: "Haruki Murakami",
+    coverUrl: "https://covers.openlibrary.org/b/isbn/9780451494627-L.jpg",
+    finishedDate: "2025-12-01",
+  },
+  {
+    title: "Kafka on the Shore",
+    author: "Haruki Murakami",
+    coverUrl: "https://covers.openlibrary.org/b/isbn/9781400079278-L.jpg",
+    finishedDate: "2025-12-01",
+  },
 ];
