@@ -24,17 +24,24 @@ export default async function AboutPage() {
 
   return (
     <>
-      {/* Hero image */}
-      <div className="w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]">
-        <Image
-          src="https://ik.imagekit.io/mrdwtdivtag/Writings/IMG_0198_RmcYghXe0.png?updatedAt=1683443722972"
-          alt="About"
-          fill
-          className="object-cover"
-          sizes="100vw"
-          priority
-        />
-      </div>
+      {/* Hero — latest selavy photograph */}
+      {latestSelavy && (
+        <div className="w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]">
+          <Image
+            src={latestSelavy.image}
+            alt={latestSelavy.location}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+        </div>
+      )}
+      {latestSelavy && latestSelavy.location !== "FILL_IN" && (
+        <p className="px-6 pt-2 text-xs text-[var(--color-alt)] font-serif italic">
+          {latestSelavy.location}
+        </p>
+      )}
 
       {/* Content blocks — 2x2 grid */}
       <section className="max-w-5xl mx-auto px-6 py-12 md:py-16">
@@ -133,28 +140,6 @@ export default async function AboutPage() {
             </div>
           )}
 
-          {/* Latest Selavy Photo */}
-          {latestSelavy && (
-            <div>
-              <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
-                Latest Photograph
-              </span>
-              <div className="mt-3 relative aspect-[3/4] overflow-hidden">
-                <Image
-                  src={latestSelavy.image}
-                  alt={latestSelavy.location}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                />
-              </div>
-              {latestSelavy.location !== "FILL_IN" && (
-                <p className="mt-2 text-xs text-[var(--color-alt)] font-serif italic">
-                  {latestSelavy.location}
-                </p>
-              )}
-            </div>
-          )}
         </div>
       </section>
     </>
