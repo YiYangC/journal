@@ -80,6 +80,15 @@ export default async function AboutPage() {
               {latestSelavy && latestSelavy.location !== "FILL_IN"
                 ? latestSelavy.location
                 : BIO.lastSeenCity}
+              {latestSelavy?.date && (
+                <span className="text-sm not-italic text-[var(--color-alt)]">
+                  {" "}on {new Date(latestSelavy.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </span>
+              )}
               <br />
               Currently working at{" "}
               <a
@@ -121,6 +130,13 @@ export default async function AboutPage() {
                   </a>
                   <p className="text-xs text-[var(--color-alt)] mt-1">
                     {latestFilm.year}
+                    {latestFilm.watchedDate && (
+                      <> · Watched {new Date(latestFilm.watchedDate).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}</>
+                    )}
                   </p>
                   {latestFilm.review && (
                     <p className="mt-2 text-xs text-[var(--color-alt)] font-serif italic line-clamp-3">
@@ -176,6 +192,14 @@ export default async function AboutPage() {
                 <p className="text-xs text-[var(--color-alt)] mt-1">
                   {CURRENT_BOOK.author}
                 </p>
+                {CURRENT_BOOK.startedDate && (
+                  <p className="text-xs text-[var(--color-alt)] mt-1">
+                    Since {new Date(CURRENT_BOOK.startedDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                    })}
+                  </p>
+                )}
               </div>
             </div>
           </div>

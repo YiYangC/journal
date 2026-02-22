@@ -7,4 +7,5 @@ export const CURRENT_BOOK = {
   title: "Orbital",
   author: "Samantha Harvey",
   coverUrl: "https://covers.openlibrary.org/b/isbn/9780802161543-L.jpg",
+  startedDate: "2026-02-01",
 };
