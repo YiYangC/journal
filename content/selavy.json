@@ -202,5 +202,23 @@
       0
     ],
     "date": "2024-03-13"
+  },
+  {
+    "image": "us9ro91oltx80uv2ad1e.jpg",
+    "location": "FILL_IN",
+    "coordinates": [0, 0],
+    "date": "2026-02-21"
+  },
+  {
+    "image": "ttfwk1emt6vqmcgfrp8n.jpg",
+    "location": "FILL_IN",
+    "coordinates": [0, 0],
+    "date": "2026-02-21"
+  },
+  {
+    "image": "lmaae6uyp8qpyisx3nui.jpg",
+    "location": "100 Van Ness Ave, San Francisco",
+    "coordinates": [37.7749, -122.4194],
+    "date": "2026-02-08"
   }
 ]
