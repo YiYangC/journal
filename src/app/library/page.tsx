@@ -15,7 +15,7 @@ export default async function LibraryPage() {
       {/* Films */}
       <div>
         <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
-          Films
+          Films · {films.length}
         </span>
         {films.length > 0 ? (
           <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3">
