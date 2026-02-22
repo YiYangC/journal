@@ -29,7 +29,7 @@ export interface TopFilm {
 export const TOP_FILMS: TopFilm[] = [
   { title: "2001: A Space Odyssey", year: "1968", letterboxdSlug: "2001-a-space-odyssey", posterUrl: "https://a.ltrbxd.com/resized/film-poster/5/1/9/8/7/51987-2001-a-space-odyssey-0-230-0-345-crop.jpg?v=a69c46a272" },
   { title: "宇宙探索编辑部", year: "2023", letterboxdSlug: "journey-to-the-west-2021", posterUrl: "https://a.ltrbxd.com/resized/film-poster/7/6/6/3/1/4/766314-journey-to-the-west-0-230-0-345-crop.jpg?v=fbbae971e9" },
-  { title: "路边野餐", year: "2015", letterboxdSlug: "kaili-blues", posterUrl: "https://a.ltrbxd.com/resized/film-poster/2/9/3/8/6/1/293861-kaili-blues-0-230-0-345-crop.jpg?v=b442d856ad" },
+  { title: "Pain and Glory", year: "2019", letterboxdSlug: "pain-and-glory", posterUrl: "https://a.ltrbxd.com/resized/film-poster/4/4/8/4/4/5/448445-pain-and-glory-0-230-0-345-crop.jpg?v=3e99d7fc67" },
   { title: "Tampopo", year: "1985", letterboxdSlug: "tampopo", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/k3/go/u7/hd/faozWWMAM4aK0C4uRUAR1jzkJio-0-230-0-345-crop.jpg?v=f6c50539a6" },
   { title: "8½", year: "1963", letterboxdSlug: "8-half", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/qt/2y/ms/4w/5pQlc8dp5dXzWg1yM70DZrsDpOl-0-230-0-345-crop.jpg?v=17965d9ac6" },
   { title: "Vertigo", year: "1958", letterboxdSlug: "vertigo", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/q9/3o/ng/om/obhM86qyv8RsE69XSMTtT9FdE0b-0-230-0-345-crop.jpg?v=1403a5e003" },

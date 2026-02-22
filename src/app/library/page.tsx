@@ -30,7 +30,10 @@ export default async function LibraryPage() {
                   alt={film.title}
                   className="w-full aspect-[2/3] object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                 />
-                <p className="mt-1 text-[10px] text-[var(--color-alt)]">
+                <p className="mt-1.5 text-[10px] font-sans truncate">
+                  {film.title}
+                </p>
+                <p className="text-[10px] text-[var(--color-alt)]">
                   {i + 1}. {film.year}
                 </p>
               </a>
