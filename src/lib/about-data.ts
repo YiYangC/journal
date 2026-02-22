@@ -29,14 +29,14 @@ export interface TopFilm {
 export const TOP_FILMS: TopFilm[] = [
   { title: "2001: A Space Odyssey", year: "1968", letterboxdSlug: "2001-a-space-odyssey", posterUrl: "https://a.ltrbxd.com/resized/film-poster/5/1/9/8/7/51987-2001-a-space-odyssey-0-230-0-345-crop.jpg?v=a69c46a272" },
   { title: "宇宙探索编辑部", year: "2023", letterboxdSlug: "journey-to-the-west-2021", posterUrl: "https://a.ltrbxd.com/resized/film-poster/7/6/6/3/1/4/766314-journey-to-the-west-0-230-0-345-crop.jpg?v=fbbae971e9" },
-  { title: "Pain and Glory", year: "2019", letterboxdSlug: "pain-and-glory", posterUrl: "https://a.ltrbxd.com/resized/film-poster/4/4/8/4/4/5/448445-pain-and-glory-0-230-0-345-crop.jpg?v=3e99d7fc67" },
   { title: "Tampopo", year: "1985", letterboxdSlug: "tampopo", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/k3/go/u7/hd/faozWWMAM4aK0C4uRUAR1jzkJio-0-230-0-345-crop.jpg?v=f6c50539a6" },
   { title: "8½", year: "1963", letterboxdSlug: "8-half", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/qt/2y/ms/4w/5pQlc8dp5dXzWg1yM70DZrsDpOl-0-230-0-345-crop.jpg?v=17965d9ac6" },
   { title: "Vertigo", year: "1958", letterboxdSlug: "vertigo", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/q9/3o/ng/om/obhM86qyv8RsE69XSMTtT9FdE0b-0-230-0-345-crop.jpg?v=1403a5e003" },
   { title: "椒麻堂会", year: "2021", letterboxdSlug: "a-new-old-play", posterUrl: "https://a.ltrbxd.com/resized/film-poster/4/4/2/9/3/2/442932-a-new-old-play-0-230-0-345-crop.jpg?v=a9beefbbfd" },
   { title: "Princess Mononoke", year: "1997", letterboxdSlug: "princess-mononoke", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/fu/5h/fp/mj/mNqZOtJIQfFQPjo3hmYLIn8Qqhf-0-230-0-345-crop.jpg?v=aae03975f7" },
-  { title: "Perfect Blue", year: "1997", letterboxdSlug: "perfect-blue", posterUrl: "https://a.ltrbxd.com/resized/film-poster/4/6/1/7/5/46175-perfect-blue-0-230-0-345-crop.jpg?v=1ed5878cce" },
   { title: "Yi Yi", year: "2000", letterboxdSlug: "yi-yi", posterUrl: "https://a.ltrbxd.com/resized/sm/upload/7s/h0/6e/0f/hhsYCYVPy1V0eTjkGNGdvpDO2qk-0-230-0-345-crop.jpg?v=f8d5b0fe80" },
+  { title: "Perfect Blue", year: "1997", letterboxdSlug: "perfect-blue", posterUrl: "https://a.ltrbxd.com/resized/film-poster/4/6/1/7/5/46175-perfect-blue-0-230-0-345-crop.jpg?v=1ed5878cce" },
+  { title: "Pain and Glory", year: "2019", letterboxdSlug: "pain-and-glory", posterUrl: "https://a.ltrbxd.com/resized/film-poster/4/4/8/4/4/5/448445-pain-and-glory-0-230-0-345-crop.jpg?v=3e99d7fc67" },
 ];
 
 export const BOOKS: Book[] = [
