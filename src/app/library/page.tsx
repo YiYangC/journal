@@ -116,8 +116,13 @@ export default async function LibraryPage() {
               </p>
               <p className="text-[10px] text-[var(--color-alt)]">
                 {book.author}
-                {book.current && (
+                {book.current ? (
                   <> · Reading</>
+                ) : book.finishedDate && (
+                  <> · {new Date(book.finishedDate).toLocaleDateString("en-US", {
+                    month: "short",
+                    year: "numeric",
+                  })}</>
                 )}
               </p>
             </div>
