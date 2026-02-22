@@ -1,21 +1,34 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getAllWritings } from "@/lib/writings";
+import { getLatestFilm } from "@/lib/letterboxd";
+import { BIO, CURRENT_BOOK } from "@/lib/about-data";
+import { SelavyPhoto } from "@/lib/types";
+import selavyData from "@/../content/selavy.json";
 
 export const metadata: Metadata = {
-  title: "About | Yi Yang",
+  title: "About",
   description:
     "Exploring intersection between tech and design. Obsessed with the nature of media.",
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const latestFilm = await getLatestFilm();
+  const writings = getAllWritings();
+  const latestWriting = writings[0] ?? null;
+  const selavyPhotos = (selavyData as SelavyPhoto[])
+    .filter((p) => p.date)
+    .sort((a, b) => b.date!.localeCompare(a.date!));
+  const latestSelavy = selavyPhotos[0] ?? null;
+
   return (
     <>
       {/* Hero image */}
-      <div className="w-full aspect-[21/9] relative overflow-hidden">
+      <div className="w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]">
         <Image
           src="https://ik.imagekit.io/mrdwtdivtag/Writings/IMG_0198_RmcYghXe0.png?updatedAt=1683443722972"
-          alt="Yi Yang"
+          alt="About"
           fill
           className="object-cover"
           sizes="100vw"
@@ -23,21 +36,7 @@ export default function AboutPage() {
         />
       </div>
 
-      <section className="p-[3rem] min-h-[30vh] flex flex-col justify-end">
-        <p className="text-[clamp(1rem,4vw,1.5rem)] text-[var(--color-alt)] mb-4">
-          <span className="mr-2">&mdash;</span>about
-        </p>
-        <h1 className="text-[clamp(2.5rem,9vw,7.25rem)] font-serif italic font-light leading-[0.8]">
-          Yi Yang
-        </h1>
-      </section>
-
-      <section className="p-[3rem] max-w-3xl ">
-        <p className="text-[clamp(1rem,4vw,1.9rem)] leading-relaxed mb-8">
-          Exploring intersection between tech and design. Obsessed with the
-          nature of media.
-        </p>
-      </section>
+      {/* LAYOUT_PLACEHOLDER */}
     </>
   );
 }
