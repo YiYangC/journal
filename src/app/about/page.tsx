@@ -26,7 +26,10 @@ export default async function AboutPage() {
     <>
       {/* Hero — latest selavy photograph */}
       {latestSelavy && (
-        <Link href="/selavy" className="block w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]">
+        <Link
+          href="/selavy"
+          className="block w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]"
+        >
           <Image
             src={latestSelavy.image}
             alt={latestSelavy.location}
@@ -38,15 +41,29 @@ export default async function AboutPage() {
         </Link>
       )}
       {latestSelavy && (
-        <Link href="/selavy" className="flex items-baseline gap-2 px-6 pt-2 hover:text-[var(--color-link)] transition-colors">
+        <Link
+          href="/selavy"
+          className="flex items-baseline justify-between px-6 pt-2 hover:text-[var(--color-link)] transition-colors"
+        >
           <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
             Latest Photograph
           </span>
-          {latestSelavy.location !== "FILL_IN" && (
-            <span className="text-xs text-[var(--color-alt)] font-serif italic">
-              {latestSelavy.location}
-            </span>
-          )}
+          <span className="flex items-baseline gap-2">
+            {latestSelavy.location !== "FILL_IN" && (
+              <span className="text-xs text-[var(--color-alt)] font-serif italic">
+                {latestSelavy.location}
+              </span>
+            )}
+            {latestSelavy.date && (
+              <span className="text-xs text-[var(--color-alt)]">
+                {new Date(latestSelavy.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+            )}
+          </span>
         </Link>
       )}
 
@@ -59,67 +76,61 @@ export default async function AboutPage() {
               About
             </span>
             <p className="mt-3 text-lg font-serif italic leading-relaxed">
-              Last seen in {BIO.lastSeenCity}. Currently working at{" "}
-              <span className="font-sans font-bold not-italic">
+              Last seen in{" "}
+              {latestSelavy && latestSelavy.location !== "FILL_IN"
+                ? latestSelavy.location
+                : BIO.lastSeenCity}
+              <br />
+              Currently working at{" "}
+              <a
+                href="https://exa.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans font-bold not-italic hover:text-[var(--color-link)] transition-colors"
+              >
                 {BIO.currentWork}
-              </span>
-              .
+              </a>{" "}
+              as a FDE
+              <br />
+              Loves architecture &amp; design
             </p>
           </div>
 
-          {/* Film + Book */}
-          <div className="flex flex-col gap-8">
-            {latestFilm && (
-              <div>
-                <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
-                  Recently Watched
-                </span>
-                <div className="mt-3 flex items-start gap-4">
-                  {latestFilm.posterUrl && (
-                    <img
-                      src={latestFilm.posterUrl}
-                      alt={latestFilm.title}
-                      className="w-16 h-auto shrink-0"
-                    />
-                  )}
-                  <div>
-                    <a
-                      href={latestFilm.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm font-sans font-bold hover:text-[var(--color-link)] transition-colors"
-                    >
-                      {latestFilm.title}
-                    </a>
-                    <p className="text-xs text-[var(--color-alt)] mt-1">
-                      {latestFilm.year}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
+          {/* Film */}
+          {latestFilm && (
             <div>
               <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
-                Currently Reading
+                Recently Watched
               </span>
               <div className="mt-3 flex items-start gap-4">
-                <img
-                  src={CURRENT_BOOK.coverUrl}
-                  alt={CURRENT_BOOK.title}
-                  className="w-16 h-auto shrink-0"
-                />
+                {latestFilm.posterUrl && (
+                  <img
+                    src={latestFilm.posterUrl}
+                    alt={latestFilm.title}
+                    className="w-16 h-auto shrink-0"
+                  />
+                )}
                 <div>
-                  <p className="text-sm font-sans font-bold">
-                    {CURRENT_BOOK.title}
-                  </p>
+                  <a
+                    href={latestFilm.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-sans font-bold hover:text-[var(--color-link)] transition-colors"
+                  >
+                    {latestFilm.title}
+                  </a>
                   <p className="text-xs text-[var(--color-alt)] mt-1">
-                    {CURRENT_BOOK.author}
+                    {latestFilm.year}
                   </p>
+                  {latestFilm.review && (
+                    <p className="mt-2 text-xs text-[var(--color-alt)] font-serif italic line-clamp-3">
+                      {latestFilm.review}
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Latest Writing */}
           {latestWriting && (
@@ -147,6 +158,27 @@ export default async function AboutPage() {
             </div>
           )}
 
+          {/* Book */}
+          <div>
+            <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
+              Currently Reading
+            </span>
+            <div className="mt-3 flex items-start gap-4">
+              <img
+                src={CURRENT_BOOK.coverUrl}
+                alt={CURRENT_BOOK.title}
+                className="w-16 h-auto shrink-0"
+              />
+              <div>
+                <p className="text-sm font-sans font-bold">
+                  {CURRENT_BOOK.title}
+                </p>
+                <p className="text-xs text-[var(--color-alt)] mt-1">
+                  {CURRENT_BOOK.author}
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </>

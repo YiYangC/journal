@@ -4,6 +4,7 @@ export interface LetterboxdFilm {
   link: string;
   posterUrl: string;
   watchedDate: string;
+  review: string;
 }
 
 export async function getLatestFilm(): Promise<LetterboxdFilm | null> {
@@ -39,9 +40,20 @@ export async function getLatestFilm(): Promise<LetterboxdFilm | null> {
     const posterUrl =
       description.match(/src=(?:"|&quot;)(https:\/\/[^"&]*?)(?:"|&quot;)/)?.[1] ?? "";
 
+    // Review text is in <p> tags after the image in the description
+    const reviewHtml =
+      description.match(/<p>([\s\S]*?)<\/p>/)?.[1] ?? "";
+    const review = reviewHtml
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
+      .replace(/&amp;/g, "&")
+      .replace(/&quot;/g, '"')
+      .replace(/<[^>]*>/g, "")
+      .trim();
+
     if (!title) return null;
 
-    return { title, year, link, posterUrl, watchedDate };
+    return { title, year, link, posterUrl, watchedDate, review };
   } catch {
     return null;
   }

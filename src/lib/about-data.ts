@@ -4,7 +4,7 @@ export const BIO = {
 };
 
 export const CURRENT_BOOK = {
-  title: "The Waves",
-  author: "Virginia Woolf",
-  coverUrl: "https://covers.openlibrary.org/b/isbn/9780156949606-L.jpg",
+  title: "Orbital",
+  author: "Samantha Harvey",
+  coverUrl: "https://covers.openlibrary.org/b/isbn/9780802161543-L.jpg",
 };
