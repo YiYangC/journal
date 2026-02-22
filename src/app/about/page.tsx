@@ -26,7 +26,7 @@ export default async function AboutPage() {
     <>
       {/* Hero — latest selavy photograph */}
       {latestSelavy && (
-        <div className="w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]">
+        <Link href="/selavy" className="block w-full aspect-[3/1] relative overflow-hidden max-h-[50vh]">
           <Image
             src={latestSelavy.image}
             alt={latestSelavy.location}
@@ -35,12 +35,19 @@ export default async function AboutPage() {
             sizes="100vw"
             priority
           />
-        </div>
+        </Link>
       )}
-      {latestSelavy && latestSelavy.location !== "FILL_IN" && (
-        <p className="px-6 pt-2 text-xs text-[var(--color-alt)] font-serif italic">
-          {latestSelavy.location}
-        </p>
+      {latestSelavy && (
+        <Link href="/selavy" className="flex items-baseline gap-2 px-6 pt-2 hover:text-[var(--color-link)] transition-colors">
+          <span className="text-xs uppercase tracking-[0.15em] text-[var(--color-alt)]">
+            Latest Photograph
+          </span>
+          {latestSelavy.location !== "FILL_IN" && (
+            <span className="text-xs text-[var(--color-alt)] font-serif italic">
+              {latestSelavy.location}
+            </span>
+          )}
+        </Link>
       )}
 
       {/* Content blocks — 2x2 grid */}
